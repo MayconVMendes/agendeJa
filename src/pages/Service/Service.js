@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import useDisplayAllJobsFromAllEnterprises from "../../hooks/display/enterpriseJob/useDisplayAllJobsFromAllEnterprises";
 import { useNavigate } from "react-router-dom";

@@ -19,6 +19,7 @@ export default function CreateFilial() {
   const [isValue, setIsValue] = useState(false);
   const [isChange, setIsChange] = useState(false);
   const { getAddress } = useGetAddress();
+  // eslint-disable-next-line no-unused-vars
   const { registerCompanyFilial } = useRegisterCompanyFilial();
 
   useEffect(() => {

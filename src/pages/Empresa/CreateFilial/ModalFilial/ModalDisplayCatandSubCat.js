@@ -17,6 +17,7 @@ import "./ModalDisplayCatandSubCat.scss";
 
 export default function ModalDisplayCatandSubCat({ data }) {
   const [isOpen, setIsOpen] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
   const dadosJson = localStorage.getItem("createFilial");
   const dados = JSON.parse(dadosJson);
