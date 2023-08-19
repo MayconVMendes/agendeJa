@@ -1,0 +1,17 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.divDadUser {
+  .divControlCard {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+    justify-content: center;
+
+    .chakra-card {
+      max-width: 300px;
+      width: 100%;
+    }
+  }
+}

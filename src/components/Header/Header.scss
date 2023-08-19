@@ -1,0 +1,224 @@
+.navigation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  width: 100%;
+  height: 94px;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  .itens {
+    padding: 32px 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    .brand-name {
+      display: flex;
+
+      .logoImg {
+        height: 20px;
+        width: auto;
+      }
+    }
+
+    .navigation-menu {
+      ul {
+        display: flex;
+        padding: 0;
+
+        li {
+          list-style-type: none;
+          margin: 0 1rem;
+          
+
+          .anchor {
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            color: #666;
+            font-size: 16px;
+            line-height: 20px;
+          }
+        }
+      }
+    }
+
+    .hamburger {
+      border: 0;
+      height: 40px;
+      width: 40px;
+      padding: 0.5rem;
+      cursor: pointer;
+      background-color: unset;
+      transition: background-color 0.2s ease-in-out;
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      display: none;
+    }
+
+    .boxLogin {
+      .anchor {
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        color: #666;
+        font-size: 16px;
+        line-height: 20px;
+
+        &.login {
+          color: #4b9fe1;
+          font-weight: 700;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navigation {
+    .itens {
+      justify-content: space-between;
+
+      .navigation-menu {
+        ul {
+          flex-direction: column;
+          position: absolute;
+          top: 75px;
+          left: 0;
+          width: 100%;
+          height: calc(100vh - 60px);
+          background-color: white;
+          border-top: 1px solid black;
+          display: none;
+
+          li {
+            text-align: center;
+            margin: 0;
+
+            &:hover {
+              background-color: #eee;
+            }
+
+            a {
+              color: black;
+              width: 100%;
+              padding: 1.5rem 0;
+            }
+          }
+        }
+
+        &.expanded {
+          ul {
+            display: block;
+          }
+        }
+      }
+
+      .hamburger {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .container {
+          display: inline-block;
+          cursor: pointer;
+
+          &.change {
+            .bar1 {
+              transform: translate(0, 9px) rotate(-45deg);
+            }
+
+            .bar2 {
+              opacity: 0;
+            }
+
+            .bar3 {
+              transform: translate(0, -9px) rotate(45deg);
+            }
+          }
+        }
+
+        .bar1,
+        .bar2,
+        .bar3 {
+          width: 30px;
+          height: 3px;
+          background-color: #333;
+          margin: 6px 0;
+          transition: 0.4s;
+        }
+      }
+
+      .boxLogin {
+        margin-right: 70px;
+
+        &.user {
+          width: 110px;
+          margin-right: 40px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .navigation {
+    width: 100%;
+    height: 94px;
+
+    .itens {
+      padding: 21px 25px;
+      justify-content: flex-start;
+
+      .brand-name {
+        margin-left: 0;
+
+        .logoImg {
+          height: 30px;
+          width: auto;
+        }
+      }
+
+      .navigation-menu {
+        margin-left: 20px;
+        width: 100%;
+
+        ul {
+          .boxLogin {
+            margin-left: auto;
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .navigation {
+    .itens {
+      padding: 21px 45px;
+
+      .navigation-menu {
+        margin-left: 48px;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .navigation {
+    .itens {
+      padding: 21px 112px;
+    }
+  }
+}

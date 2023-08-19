@@ -1,0 +1,143 @@
+.pageLogin {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50px;
+
+  h1 {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 0;
+  }
+
+  span {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+  }
+
+  form {
+    display: grid;
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    justify-content: center;
+
+    label {
+      display: grid;
+      margin-top: 15px;
+      font-size: 18px;
+      position: relative;
+
+      input {
+        border-radius: 8px;
+        width: auto;
+        background: #f5f5f5;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+
+        &::placeholder {
+          color: #000;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 22px;
+        }
+
+        &.error {
+          border-color: red;
+        }
+      }
+
+      .spanError {
+        font-size: 14px;
+        color: red;
+        text-align: left;
+      }
+    }
+
+    .chakra-checkbox {
+      display: flex;
+    }
+
+    .functions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      align-items: center;
+
+      button {
+        width: 200px;
+        height: 40px;
+      }
+
+      a {
+        text-decoration: none;
+        font-weight: 700;
+        line-height: 22px;
+        text-align: center;
+        color: #000000;
+      }
+    }
+
+    .register {
+      span {
+        font-weight: 300;
+        a {
+          text-decoration: none;
+          font-weight: 700;
+          line-height: 22px;
+          text-align: center;
+          color: #4b9fe1;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 320px) {
+  .pageLogin {
+    form {
+      width: 100%;
+      height: 30%;
+
+      .functions {
+        button {
+          width: 90px;
+          font-size: 18px;
+        }
+
+        a {
+          font-size: 16px;
+        }
+      }
+
+      .register {
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .pageLogin {
+    form {
+      label {
+        max-width: 290px;
+
+        input {
+          max-width: 290px;
+        }
+      }
+    }
+  }
+}
