@@ -6,7 +6,7 @@ import "./phoneBook.scss";
 
 export default function PhoneBook() {
   return (
-    <section className="section06" id="section06">
+    <section className="phoneBook" id="section06">
       <div className="divBox">
         <div className="text">
           <h2>Sua agenda disponível no seu celular</h2>

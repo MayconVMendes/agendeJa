@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "./components/Header/Header";
-import "./styles/app.scss";
 import { Outlet } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import Footer from "./components/Footer/Footer";
@@ -10,9 +9,9 @@ function App() {
     <ChakraProvider>
       <div className="App">
         <Header />
-        <div className="content">
+        <main className="content">
           <Outlet />
-        </div>
+        </main>
         <Footer />
       </div>
     </ChakraProvider>

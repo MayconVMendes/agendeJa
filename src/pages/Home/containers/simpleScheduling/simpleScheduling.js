@@ -4,7 +4,7 @@ import "./simpleScheduling.scss";
 
 export default function SimpleScheduling() {
   return (
-    <section className="section04">
+    <section className="simpleScheduling">
       <div className="divBox">
         <div className="text">
           <h2>Simplifique os agendamentos de seu negócio</h2>

@@ -1,3 +1,5 @@
+@import "../../styles/variables";
+
 .navigation {
   display: flex;
   flex-direction: row;
@@ -202,7 +204,7 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
+@include notebookview {
   .navigation {
     .itens {
       padding: 21px 45px;

@@ -1,4 +1,6 @@
-.section02 {
+@import '../../../../styles/variables';
+
+.whatSchedule {
   .divBox {
     display: flex;
     align-items: center;
@@ -22,12 +24,23 @@
   }
 }
 
-@media screen and (max-width: 768px) {
-  .section02 {
-    margin-top: 30px;
+@include mobileview {
+  .whatSchedule {
+    padding: 50px 15px 0px 15px;
 
     .divBox {
-      display: grid;
+      display: flex;
+      flex-direction: column-reverse;
+
+      .text {
+        display: grid;
+        gap: 15px;
+        
+        h2 {
+          font-size: $h2Mobile;
+          margin-bottom: 10px;
+        }
+      }
 
       .text,
       .img {
@@ -46,52 +59,50 @@
   }
 }
 
-@media screen and (min-width: 769px) {
-  .section02 {
+@include tabletview {
+  .whatSchedule {
+    padding: 50px 50px 0 50px;
+    
     .divBox {
+      .text,
       .img {
-        width: 55%;
+        width: 50%;
+      }
+
+      .img {
         .meetingHome {
           width: 95%;
+        }
+      }
+
+      .text {
+        h2 {
+          font-size: $h2Tablet;
+          margin-bottom: 15px;
         }
       }
     }
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .section02 {
+@include notebookview {
+  .whatSchedule {
+    display: flex;
+    justify-content: center;
+
     .divBox {
+      width: 100%;
+      max-width: 900px;
+
       .text {
-        width: 310px;
 
         h2 {
-          font-size: 32px;
+          font-size: $h2Notebook;
         }
 
         p {
           font-size: 18px;
         }
-      }
-
-      .img {
-        .notebookHome {
-          width: 592px;
-        }
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .section02 {
-    .divBox {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .text {
-        width: 333px;
       }
     }
   }

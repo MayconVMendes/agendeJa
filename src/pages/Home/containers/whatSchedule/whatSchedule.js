@@ -4,7 +4,7 @@ import "./whatSchedule.scss";
 
 export default function WhatSchedule() {
   return (
-    <section className="section02">
+    <section className="whatSchedule">
       <div className="divBox">
         <div className="img">
           <img className="meetingHome" src={Meeting} alt="Meeting" />

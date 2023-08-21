@@ -1,4 +1,6 @@
-.section01 {
+@import '../../../../styles/variables';
+
+.notebookSection {
   .divBox {
     display: flex;
     align-items: center;
@@ -28,10 +30,23 @@
   }
 }
 
-@media screen and (max-width: 768px) {
-  .section01 {
+@include mobileview {
+  .notebookSection {
+    padding: 50px 15px 0px 15px;
+
     .divBox {
       display: grid;
+      gap: 15px;
+
+      .text {
+        display: grid;
+        gap: 20px;
+
+        h2 {
+          font-size: $h2Mobile;
+          line-height: unset;
+        }
+      }
 
       .text,
       .img {
@@ -50,10 +65,28 @@
   }
 }
 
-@media screen and (min-width: 769px) {
-  .section01 {
+@include tabletview {
+  .notebookSection {
+    padding: 50px;
+
     .divBox {
+      .text {
+        width: 50%;
+        display: grid;
+        gap: 20px;
+
+        h2 {
+          font-size: $h2Tablet;
+        }
+
+        p {
+          font-size: 18px;
+        }
+      }
+
       .img {
+        width: 50%;
+
         .notebookHome {
           width: 450px;
         }
@@ -62,14 +95,18 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .section01 {
+@include notebookview {
+  .notebookSection {
+    display: flex;
+    justify-content: center;
+    
     .divBox {
-      .text {
-        width: 310px;
+      max-width: 900px;
+      width: 100%;
 
+      .text {
         h2 {
-          font-size: 32px;
+          font-size: $h2Notebook;
         }
 
         p {
@@ -79,22 +116,6 @@
         a {
           font-size: 18px;
         }
-      }
-
-      .img {
-        .notebookHome {
-          width: 592px;
-        }
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .section01 {
-    .divBox {
-      .text {
-        width: 310px;
       }
     }
   }

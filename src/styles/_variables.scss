@@ -1,0 +1,38 @@
+//Colors
+$primary-color: #4b9fe1;
+
+//Fonts Notebook
+$h2Notebook: 32px;
+
+//Fonts Tablet
+$h2Tablet: 26px;
+
+//Fonts Mobile
+$h2Mobile: 25px;
+$h3Mobile: 20px;
+$aMobile: 15px;
+
+//Resolutions
+@mixin mobileview {
+	@media only screen and (max-width: 768px) {
+		@content;
+	}
+}
+
+@mixin tabletview {
+	@media screen and (min-width: 769px) {
+		@content;
+	}
+}
+
+@mixin notebookview {
+	@media screen and (min-width: 1024px) {
+		@content;
+	}
+}
+
+@mixin desktopview {
+	@media screen and (min-width: 1440px) {
+		@content;
+	}
+}

@@ -1,9 +1,10 @@
+@import '../../styles/_variables.scss';
+
 .footerHome {
-  background: #4b9fe1;
-  height: 482px;
+  background: $primary-color;
   width: 100%;
   padding: 46px 208px;
-  margin-top: 40px;
+  margin-top: 60px;
 
   .optionsFooter {
     display: flex;
@@ -54,6 +55,51 @@
       margin-left: 30px;
       font-size: 16px;
       color: #ffffff;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .footerHome {
+    div.optionsFooter {
+      grid-template-columns: auto auto;
+      gap: 20px;
+    }
+  }
+}
+
+@include mobileview {
+  .footerHome {
+    padding: 46px 15px;
+
+    .optionsFooter {
+      display: grid;
+      gap: 25px;
+      grid-template-columns: auto auto auto;
+      justify-content: space-around;
+
+      .title {
+        font-size: $h3Mobile;
+        margin-bottom: 10px;
+      }
+      
+      a {
+        font-size: $aMobile;
+      }
+    }
+  }
+}
+
+@include tabletview {
+  .footerHome {
+    padding: 50px 50px;
+    display: grid;
+    justify-content: center;
+
+    .optionsFooter,
+    .logoFooter {
+      width: calc(100vw - 100px);
+      max-width: 900px;
     }
   }
 }
