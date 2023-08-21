@@ -6,7 +6,7 @@ import "./everythingYouNeed.scss";
 
 export default function EverythingYouNeed() {
   return (
-    <section className="section03" id="section03">
+    <section className="everythingYouNeed" id="section03">
       <h2>Tudo que você precisa...</h2>
       <div className="divBox">
         <div className="divSon">

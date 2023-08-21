@@ -7,7 +7,7 @@ import "./ourClients.scss";
 
 export default function OurClients() {
   return (
-    <section className="section05" id="section05">
+    <section className="ourClients" id="section05">
       <h2>Conheça nossos clientes</h2>
       <div className="divBox">
         <div className="divSon">

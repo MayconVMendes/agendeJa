@@ -1,5 +1,6 @@
-import React from "react";
+import React from 'react';
 import LogoImg from "../../assets/agendeJa_logoWhite.png";
+import { Link } from "react-router-dom";
 import "./Footer.scss";
 
 export default function Footer() {
@@ -29,7 +30,11 @@ export default function Footer() {
         </div>
       </div>
       <div className="logoFooter">
-        <img className="logoImg" src={LogoImg} alt="AgendeJá" />
+        <Link to="/" onClick={()=> {
+          window.scrollTo(0, 0, 100000);
+        }} >
+          <img className="logoImg" src={LogoImg} alt="AgendeJá" />
+        </Link>
         <p>Copyright © 2023 Agende Já - Todos os direitos reservados.</p>
       </div>
     </footer>

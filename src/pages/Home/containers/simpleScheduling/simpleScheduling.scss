@@ -1,4 +1,6 @@
-.section04 {
+@import '../../../../styles/variables';
+
+.simpleScheduling {
   background: #4b9fe1;
   width: 100%;
   height: 440px;
@@ -35,16 +37,26 @@
   }
 }
 
-@media screen and (max-width: 768px) {
-  .section04 {
+@include mobileview {
+  .simpleScheduling {
+    height: unset;
     .divBox {
       display: grid;
       justify-content: space-between;
 
       .text {
+        display: grid;
         width: auto;
         padding: 0 10px;
         text-align: center;
+        margin-top: 25px;
+        padding: 0 15px;
+        gap: 20px;
+
+        h2 {
+          line-height: unset;
+          font-size: $h2Mobile;
+        }
       }
 
       .img {
@@ -59,8 +71,8 @@
   }
 }
 
-@media screen and (min-width: 769px) {
-  .section04 {
+@include tabletview {
+  .simpleScheduling {
     height: 40%;
 
     .divBox {
@@ -71,21 +83,26 @@
       }
 
       .text {
-        margin-left: 10%;
-        width: 40%;
+        padding-left: 50px;
+        width: 49%;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        gap: 5px;
+
+        h2 {
+          font-size: calc($h2Tablet - 1px );
+        }
       }
 
       .img {
         display: flex;
         justify-content: flex-end;
-        width: 60%;
+        width: 50%;
         height: 100%;
 
         img {
-          width: 96%;
+          width: 100%;
           height: 100%;
         }
       }
@@ -93,17 +110,18 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .section04 {
+@include notebookview {
+  .simpleScheduling {
     background: #4b9fe1;
     height: auto;
 
     .divBox {
-      display: flex;
+      justify-content: end;
 
       .text {
-        width: 260px;
-        gap: 15px;
+        gap: 25px;
+        max-width: 490px;
+        margin-right: 10px;
 
         h2 {
           font-size: 32px;
@@ -122,8 +140,8 @@
   }
 }
 
-@media screen and (min-width: 1440px) {
-  .section04 {
+@include desktopview {
+  .simpleScheduling {
     height: 502px;
 
     .divBox {

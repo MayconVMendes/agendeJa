@@ -1,4 +1,6 @@
-.section06 {
+@import '../../../../styles/variables';
+
+.phoneBook {
   .divBox {
     display: flex;
     align-items: center;
@@ -31,10 +33,22 @@
   }
 }
 
-@media screen and (max-width: 768px) {
-  .section06 {
+@include mobileview {
+  .phoneBook {
+    padding: 50px 15px 0px 15px;
+
     .divBox {
       display: grid;
+
+      .text {
+        display: grid;
+        gap: 5px;
+
+        h2 {
+          font-size: $h2Mobile;
+          line-height: unset;
+        }
+      }
 
       .text,
       .img {
@@ -44,6 +58,7 @@
         .imgsIcons {
           display: grid;
           justify-content: center;
+          gap: 20px;
         }
       }
 
@@ -54,10 +69,20 @@
   }
 }
 
-@media screen and (min-width: 769px) {
-  .section06 {
+@include tabletview {
+  .phoneBook {
+    padding: 50px 50px 0px 50px;
+
     .divBox {
       .text {
+        h2 {
+          font-size: $h2Tablet;
+        }
+
+        p {
+          font-size: 18px;
+        }
+
         .imgsIcons {
           display: flex;
           justify-content: space-between;
@@ -73,32 +98,40 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .section06 {
+@include notebookview {
+  .phoneBook {
+    display: flex;
+    justify-content: center;
+    
     .divBox {
+      max-width: 900px;
+
       .text {
-        width: 310px;
+        width: 45%;
 
         h2 {
-          font-size: 32px;
+          font-size: $h2Notebook;
         }
 
         p {
           font-size: 18px;
         }
+
+        .imgsIcons {
+          width: 90%;
+          justify-content: space-between;
+        }
       }
 
       .img {
-        .cellphone {
-          width: 592px;
-        }
+        width: 50%;
       }
     }
   }
 }
 
 @media screen and (min-width: 1440px) {
-  .section06 {
+  .phoneBook {
     .divBox {
       .text {
         width: 384px;

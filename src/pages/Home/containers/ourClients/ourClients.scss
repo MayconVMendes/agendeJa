@@ -1,4 +1,6 @@
-.section05 {
+@import '../../../../styles/variables';
+
+.ourClients {
   background: #f5f5f5;
   width: 100%;
   text-align: center;
@@ -19,9 +21,16 @@
   }
 }
 
-@media screen and (max-width: 768px) {
-  .section05 {
-    margin-top: 490px;
+@include mobileview {
+  .ourClients {
+    padding: 50px 15px 15px 15px;
+    display: grid;
+    gap: 25px;
+
+    h2 {
+      font-size: $h2Mobile;
+      line-height: unset;
+    }
 
     .divBox {
       display: grid;
@@ -30,8 +39,14 @@
   }
 }
 
-@media screen and (min-width: 769px) {
-  .section05 {
+@include tabletview {
+  .ourClients {
+    padding: 50px 50px 50px 50px;
+
+    h2 {
+      font-size: $h2Tablet;
+    }
+
     .divBox {
       display: flex;
       justify-content: center;
@@ -50,10 +65,33 @@
   }
 }
 
+@include notebookview {
+  .ourClients {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    h2 {
+      font-size: $h2Notebook;
+    }
+
+    h2,
+    .divBox {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .divBox {
+      .divSon {
+        justify-content: space-between;
+        width: 100%;
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 1440px) {
-  .section05 {
-    background: #f5f5f5;
-    width: 100%;
+  .ourClients {
     height: 250px;
 
     h2 {

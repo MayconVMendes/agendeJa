@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+@import "./variables";
 * {
   font-family: "Montserrat";
 }
@@ -35,7 +36,7 @@ button.primaryBtn {
   cursor: pointer;
 }
 
-@media screen and (min-width: 1024px) {
+@include notebookview {
   h2 {
     font-weight: 700;
     font-size: 32px;

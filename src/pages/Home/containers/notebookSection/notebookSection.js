@@ -4,7 +4,7 @@ import "./notebookSection.scss";
 
 export default function notebookSection() {
   return (
-    <section className="section01" id="section01">
+    <section className="notebookSection" id="section01">
       <div className="divBox">
         <div className="text">
           <h2>

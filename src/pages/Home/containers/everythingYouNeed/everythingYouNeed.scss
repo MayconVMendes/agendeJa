@@ -1,4 +1,6 @@
-.section03 {
+@import '../../../../styles/variables';
+
+.everythingYouNeed {
   display: grid;
   text-align: center;
   justify-content: center;
@@ -11,9 +13,7 @@
   }
 
   .divBox {
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
+    display: grid;
     justify-content: space-evenly;
 
     .divSon {
@@ -30,7 +30,6 @@
           line-height: 22px;
           text-align: center;
           color: #333333;
-          padding: 0 30px;
         }
 
         p {
@@ -54,15 +53,16 @@
   }
 }
 
-@media screen and (max-width: 768px) {
-  .section03 {
+@include mobileview {
+  .everythingYouNeed {
     display: grid;
     text-align: center;
     justify-content: center;
-    margin-bottom: 40px;
+    padding: 50px 15px 0px 15px;
 
     h2 {
-      font-size: 26px;
+      font-size: $h2Mobile;
+      line-height: unset;
     }
 
     .divBox {
@@ -76,7 +76,11 @@
         padding: 20px 0;
 
         .text {
-          margin-top: 20px;
+          margin-top: 25px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
         }
       }
 
@@ -87,60 +91,52 @@
   }
 }
 
-@media screen and (min-width: 769px) {
-  .section03 {
+@include tabletview {
+  .everythingYouNeed {
     display: grid;
     text-align: center;
     justify-content: center;
+    padding: 50px 50px 0 50px;
+    gap: 25px;
 
     h2 {
-      font-size: 35px;
+      font-size: $h2Tablet;
     }
 
-    .divBox {
-      width: 90vw;
-      height: 280px;
+    .divBox,
+    .divSon {
+      width: calc(100vw - 100px);
+    }
 
+    .divSon {
+      margin-bottom: 25px;
+      
       .text {
-        width: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
       }
     }
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .section03 {
-    display: grid;
-    text-align: center;
-    justify-content: center;
-
+@include notebookview {
+  .everythingYouNeed {
     h2 {
-      font-size: 48px;
+      font-size: $h2Notebook;
     }
 
-    .divBox {
-      width: 85vw;
-      height: 308px;
-
-      .text {
-        width: 200px;
-      }
+    h2,
+    .divBox,
+    .divSon {
+      max-width: 900px;
     }
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .section03 {
-    display: grid;
-    text-align: center;
-    justify-content: center;
-
+    
     .divBox {
-      width: 1216px;
-      height: 308px;
-
-      .text {
-        width: 200px;
+      .divSon {
+        justify-content: space-between;
+        margin-bottom: 50px;
       }
     }
   }

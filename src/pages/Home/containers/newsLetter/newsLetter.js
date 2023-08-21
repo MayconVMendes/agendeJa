@@ -4,7 +4,7 @@ import "./newsLetter.scss";
 export default function NewsLetter() {
   const [, setEmail] = useState("");
   return (
-    <section className="section07">
+    <section className="newsLetter">
       <div className="divBox">
         <h2>Quer saber mais?</h2>
         <p>

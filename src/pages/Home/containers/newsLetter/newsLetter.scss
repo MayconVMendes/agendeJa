@@ -1,4 +1,6 @@
-.section07 {
+@import '../../../../styles/variables';
+
+.newsLetter {
   display: flex;
   justify-content: center;
 
@@ -12,11 +14,9 @@
     text-align: center;
     align-items: center;
     padding: 46px 0px;
-    margin-bottom: 100px;
 
     h2 {
       font-weight: 700;
-      font-size: 32px;
       line-height: 39px;
       color: #333333;
     }
@@ -50,6 +50,60 @@
         position: inherit;
         font-weight: 700;
         font-size: 18px;
+      }
+    }
+  }
+}
+
+@include mobileview {
+  .newsLetter {
+    .divBox {
+      width: 100%;
+      padding: 50px 15px 0 15px;
+      height: unset;
+      gap: 25px;
+
+      h2 {
+        font-size: $h2Mobile;
+      }
+
+      p {
+        width: 100%;
+        max-width: 430px;
+        height: auto;
+      }
+
+      div {
+        input {
+          width: 100%;
+          max-width: 430px;
+        }
+      }
+    }
+  }
+}
+
+@include tabletview {
+  .newsLetter {
+    padding: 50px 50px 0 50px;
+
+    .divBox {
+      width: 100%;
+
+      h2 {
+        font-size: $h2Tablet;
+      }
+    }
+  }
+}
+
+@include notebookview {
+  .newsLetter {
+    .divBox {
+      max-width: 900px;
+
+      h2 {
+        font-size: $h2Notebook;
       }
     }
   }
