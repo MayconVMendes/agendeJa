@@ -36,6 +36,10 @@ button.primaryBtn {
   cursor: pointer;
 }
 
+#chakra-toast-manager-top {
+  top: 100px !important;
+}
+
 @include notebookview {
   h2 {
     font-weight: 700;

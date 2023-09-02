@@ -6,7 +6,7 @@ import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
-    <ChakraProvider>
+    <ChakraProvider toastOptions={{ defaultOptions: { position: 'top' } }}>
       <div className="App">
         <Header />
         <main className="content">

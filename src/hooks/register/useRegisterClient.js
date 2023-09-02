@@ -1,6 +1,8 @@
+import { useState } from "react";
 import axios from "axios";
 
 export default function useLogin() {
+  const [loading, setLoading] = useState(false);
   const apiUrl = process.env.REACT_APP_API_AGENDEJA_AWS;
   const url = `${apiUrl}:5000/agenda/register`;
   const registerUser = async ({
@@ -14,6 +16,7 @@ export default function useLogin() {
     isJobProvider,
   }) => {
     try {
+      setLoading(true);
       const response = await axios.post(url, {
         email: email,
         password: password,
@@ -24,9 +27,11 @@ export default function useLogin() {
         cpf: cpf,
         isJobProvider: isJobProvider,
       });
+      setLoading(false);
 
       return response.data;
     } catch (error) {
+      setLoading(false);
       throw error;
     }
   };
@@ -109,5 +114,6 @@ export default function useLogin() {
   return {
     registerUser,
     registerUserProvider,
+    loading
   };
 }

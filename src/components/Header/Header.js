@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import LogoImg from "../../assets/agendeJa-logo.svg";
+import LogoImg from "../../assets/logo_agendify_blue.svg";
 import "./Header.scss";
 import MenuHeader from "./Menu/MenuHeader";
 import DrawerEnterpriseComponent from "../Drawer/DrawerEnterprise";
