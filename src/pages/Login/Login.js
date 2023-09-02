@@ -68,7 +68,7 @@ export default function Login() {
       {isFetching ? <Loader /> : ""}
       <div className="pageLogin">
         <h1>Fazer login</h1>
-        <span>Entre com sua conta criada</span>
+        <span className="spanSub">Entre com sua conta criada</span>
         <form onSubmit={handleSubmit}>
           <label>
             <input

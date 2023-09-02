@@ -7,6 +7,7 @@ import { Switch, FormControl, FormLabel } from "@chakra-ui/react";
 import InputMask from "react-input-mask";
 import { useToast } from "@chakra-ui/react";
 import Loader from "../../components/Loader/Loader";
+import { Checkbox } from "@chakra-ui/react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -22,6 +23,7 @@ export default function Login() {
   const navigate = useNavigate();
   const toast = useToast();
   const [isFetching, setIsFetching] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     const dadosJson = localStorage.getItem("registrarEmpresa");
@@ -91,8 +93,8 @@ export default function Login() {
       {isFetching ? <Loader /> : ""}
 
       <div className="register">
-        <h1>Crie uma conta!</h1>
-        <span>Crie uma conta e acesse</span>
+        <h1>Cadastre-se</h1>
+        <span className="spanSub">Crie uma conta e acesse</span>
         <form onSubmit={handleSubmit} className="formRegister">
           <FormControl display="flex" alignItems="center">
             <Switch
@@ -124,6 +126,13 @@ export default function Login() {
                   setFirstName(event.target.value);
                 }}
               />
+              {firstName ? (
+              <span className="spanError">
+                Por favor preencher este campo...
+              </span>
+            ) : (
+              ""
+            )}
             </label>
             <label>
               <input
@@ -185,7 +194,7 @@ export default function Login() {
           <div className="passwords">
             <label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 value={password}
                 placeholder="Senha"
                 onChange={(event) => {
@@ -195,7 +204,7 @@ export default function Login() {
             </label>
             <label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 value={confirmPassword}
                 placeholder="Confirmar Senha"
                 onChange={(event) => {
@@ -204,6 +213,14 @@ export default function Login() {
               />
             </label>
           </div>
+          <Checkbox
+              isChecked={showPassword}
+              onChange={() => {
+                setShowPassword(!showPassword);
+              }}
+            >
+              Mostrar senha
+            </Checkbox>
           <div className="functions">
             <Link to="/login">Fazer login</Link>
             <button className="primaryBtn" type="submit">
