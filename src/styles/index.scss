@@ -40,6 +40,23 @@ button.primaryBtn {
   top: 100px !important;
 }
 
+.chakra-checkbox {
+  .chakra-checkbox__control {
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 5px;
+  }
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  text-align: center;
+  color: #000000;
+  margin-bottom: 0;
+}
+
 @include notebookview {
   h2 {
     font-weight: 700;
