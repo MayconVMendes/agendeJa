@@ -4,6 +4,9 @@ import useRegisterCliente from "../../hooks/register/useRegisterClient";
 import "./cadastrar.scss";
 import { useNavigate } from "react-router-dom";
 import { Switch, FormControl, FormLabel } from "@chakra-ui/react";
+import InputMask from "react-input-mask";
+import { useToast } from "@chakra-ui/react";
+import Loader from "../../components/Loader/Loader";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -15,8 +18,10 @@ export default function Login() {
   const [cpf, setCpf] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [switchValue, setSwitchValue] = useState(false);
-  const { registerUser } = useRegisterCliente();
+  const { registerUser, loading } = useRegisterCliente();
   const navigate = useNavigate();
+  const toast = useToast();
+  const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
     const dadosJson = localStorage.getItem("registrarEmpresa");
@@ -32,6 +37,14 @@ export default function Login() {
       setCpf(dados.cpf);
     }
   }, []);
+
+  useEffect(() => {
+    if (loading === true) {
+      setIsFetching(true);
+    } else {
+      setIsFetching(false);
+    }
+  }, [loading]);
 
   const info = {
     email: email,
@@ -53,122 +66,152 @@ export default function Login() {
         navigate("/cadastro-empresa");
       } else {
         await registerUser(info);
+        toast({
+          title: "Conta criada.",
+          description: "Seu cadastro foi realizado com sucesso!",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
         navigate("/");
       }
-    } catch (error) {}
+    } catch (error) {
+      toast({
+        title: "Ocorreu algum erro.",
+        description: `Error: ${error}`,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
-    <div className="register">
-      <h1>Crie uma conta!</h1>
-      <span>Crie uma conta e acesse</span>
-      <form onSubmit={handleSubmit} className="formRegister">
-        <FormControl display="flex" alignItems="center">
-          <Switch
-            id="email-alerts"
-            isChecked={switchValue}
-            onChange={() => setSwitchValue(!switchValue)}
-          />
-          <FormLabel htmlFor="email-alerts" mb="0">
-            Você é prestador de serviços?
-          </FormLabel>
-        </FormControl>
-        <div className="columnName">
-          <label>
-            <input
-              type="text"
-              value={firstName}
-              placeholder="Nome"
-              onChange={(event) => {
-                setFirstName(event.target.value);
-              }}
-            />
-          </label>
-          <label>
-            <input
-              type="text"
-              value={lastName}
-              placeholder="Sobrenome"
-              onChange={(event) => {
-                setLastName(event.target.value);
-              }}
-            />
-          </label>
-        </div>
-        <div className="columnEmail">
-          <label>
-            <input
-              type="text"
-              value={phone}
-              placeholder="Telefone"
-              onChange={(event) => {
-                setPhone(event.target.value);
-              }}
-            />
-          </label>
-          <label>
-            <input
-              type="email"
-              value={email}
-              placeholder="Email"
-              onChange={(event) => {
-                setEmail(event.target.value);
-              }}
-            />
-          </label>
-        </div>
+    <>
+      {isFetching ? <Loader /> : ""}
 
-        <div className="columnCpfDt">
-          <label>
-            <input
-              value={cpf}
-              placeholder="CPF"
-              onChange={(event) => {
-                setCpf(event.target.value);
+      <div className="register">
+        <h1>Crie uma conta!</h1>
+        <span>Crie uma conta e acesse</span>
+        <form onSubmit={handleSubmit} className="formRegister">
+          <FormControl display="flex" alignItems="center">
+            <Switch
+              id="email-alerts"
+              isChecked={switchValue}
+              onChange={() => {
+                setSwitchValue(!switchValue);
+                setEmail("");
+                setPassword("");
+                setConfirmPassword("");
+                setBirthday("");
+                setPhone("");
+                setFirstName("");
+                setLastName("");
+                setCpf("");
               }}
             />
-          </label>
-          <label>
-            <input
-              type="date"
-              value={birthday}
-              placeholder="Data de nascimento"
-              onChange={(event) => {
-                setBirthday(event.target.value);
-              }}
-            />
-          </label>
-        </div>
+            <FormLabel htmlFor="email-alerts" mb="0">
+              Você é prestador de serviços?
+            </FormLabel>
+          </FormControl>
+          <div className="columnName">
+            <label>
+              <input
+                type="text"
+                value={firstName}
+                placeholder="Nome"
+                onChange={(event) => {
+                  setFirstName(event.target.value);
+                }}
+              />
+            </label>
+            <label>
+              <input
+                type="text"
+                value={lastName}
+                placeholder="Sobrenome"
+                onChange={(event) => {
+                  setLastName(event.target.value);
+                }}
+              />
+            </label>
+          </div>
+          <div className="columnEmail">
+            <label>
+              <InputMask
+                mask="(99) 99999-9999"
+                value={phone}
+                placeholder="Telefone"
+                onChange={(event) => {
+                  setPhone(event.target.value);
+                }}
+              />
+            </label>
+            <label>
+              <input
+                type="email"
+                value={email}
+                placeholder="Email"
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
+              />
+            </label>
+          </div>
 
-        <div className="passwords">
-          <label>
-            <input
-              type="password"
-              value={password}
-              placeholder="Senha"
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
-            />
-          </label>
-          <label>
-            <input
-              type="password"
-              value={confirmPassword}
-              placeholder="Confirmar Senha"
-              onChange={(event) => {
-                setConfirmPassword(event.target.value);
-              }}
-            />
-          </label>
-        </div>
-        <div className="functions">
-          <Link to="/login">Fazer login</Link>
-          <button className="primaryBtn" type="submit">
-            Cadastrar
-          </button>
-        </div>
-      </form>
-    </div>
+          <div className="columnCpfDt">
+            <label>
+              <InputMask
+                mask="999.999.999-99"
+                value={cpf}
+                placeholder="CPF"
+                onChange={(event) => {
+                  setCpf(event.target.value);
+                }}
+              />
+            </label>
+            <label>
+              <input
+                type="date"
+                value={birthday}
+                placeholder="Data de nascimento"
+                onChange={(event) => {
+                  setBirthday(event.target.value);
+                }}
+              />
+            </label>
+          </div>
+
+          <div className="passwords">
+            <label>
+              <input
+                type="password"
+                value={password}
+                placeholder="Senha"
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+              />
+            </label>
+            <label>
+              <input
+                type="password"
+                value={confirmPassword}
+                placeholder="Confirmar Senha"
+                onChange={(event) => {
+                  setConfirmPassword(event.target.value);
+                }}
+              />
+            </label>
+          </div>
+          <div className="functions">
+            <Link to="/login">Fazer login</Link>
+            <button className="primaryBtn" type="submit">
+              Cadastrar
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
