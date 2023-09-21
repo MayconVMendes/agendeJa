@@ -6,7 +6,7 @@ export default function useDisplaySubCategoryAll() {
   const [data, setData] = useState(null);
 
   async function displaySubCategoryAll() {
-    let url = `${apiUrl}:5000/agenda/subcategory/`;
+    let url = `${apiUrl}:8000/agenda/subcategory/`;
 
     if (data == null) {
       const response = await axios.get(url);

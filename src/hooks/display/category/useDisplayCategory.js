@@ -6,7 +6,7 @@ export default function useDisplayCategory() {
   const [data, setData] = useState(null);
 
   async function displayCategory() {
-    let url = `${apiUrl}:5000/agenda/category/`;
+    let url = `${apiUrl}:8000/agenda/category/`;
 
     if (data == null) {
       const response = await axios.get(url);

@@ -14,7 +14,7 @@ export default function useUpdateCompanyFilial() {
     isNumero,
     userId
   ) => {
-    let url = `${apiUrl}:5000/agenda/company/${id}`;
+    let url = `${apiUrl}:8000/agenda/company/${id}`;
 
     try {
       const response = await axios.put(url, {

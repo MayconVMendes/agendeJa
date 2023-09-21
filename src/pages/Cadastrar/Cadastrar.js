@@ -52,10 +52,10 @@ export default function Login() {
     email: email,
     password: password,
     birthday: birthday,
-    phone: phone,
+    phone: phone.replace(/[^0-9]/g, ""),
     firstName: firstName,
     lastName: lastName,
-    cpf: cpf,
+    cpf: cpf.replace(/[^0-9]/g, ""),
     isJobProvider: switchValue,
   };
 
@@ -126,13 +126,6 @@ export default function Login() {
                   setFirstName(event.target.value);
                 }}
               />
-              {firstName ? (
-              <span className="spanError">
-                Por favor preencher este campo...
-              </span>
-            ) : (
-              ""
-            )}
             </label>
             <label>
               <input

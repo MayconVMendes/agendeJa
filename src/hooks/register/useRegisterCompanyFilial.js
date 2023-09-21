@@ -16,7 +16,7 @@ export default function useRegisterCompanyFilial() {
     category,
     subCategories
   ) {
-    let url = `${apiUrl}:5000/agenda/company/`;
+    let url = `${apiUrl}:8000/agenda/company/`;
 
     const response = await axios.post(url, {
       fantasyName: fantasyName,

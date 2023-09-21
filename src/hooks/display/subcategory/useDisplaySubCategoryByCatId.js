@@ -4,7 +4,7 @@ export default function useDisplaySubCategoryByCatId() {
   const apiUrl = process.env.REACT_APP_API_AGENDEJA_AWS;
 
   async function displaySubCategoryByCatId(value) {
-    let url = `${apiUrl}:5000/agenda/subcategory/${value}`;
+    let url = `${apiUrl}:8000/agenda/subcategory/${value}`;
 
     const response = await axios.get(url);
     return response.data;

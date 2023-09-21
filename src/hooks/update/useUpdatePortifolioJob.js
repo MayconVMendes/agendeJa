@@ -3,7 +3,7 @@ import axios from "axios";
 export default function useUpdatePortifolioJob() {
   const apiUrl = process.env.REACT_APP_API_AGENDEJA_AWS;
   const updatePortifolioJob = async (idJob, name, price, description) => {
-    let url = `${apiUrl}:5000/agenda/userjob/${idJob}`;
+    let url = `${apiUrl}:8000/agenda/userjob/${idJob}`;
 
     try {
       const response = await axios.put(url, {
