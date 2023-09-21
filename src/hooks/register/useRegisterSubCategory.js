@@ -8,7 +8,7 @@ export default function useRegisterSubCategory() {
 
   async function registerSubCategory(id, value) {
     setIsLoading(true);
-    let url = `${apiUrl}:5000/agenda/subcategory/`;
+    let url = `${apiUrl}:8000/agenda/subcategory/`;
 
     const response = await axios
       .post(url, { name: value, id: id })

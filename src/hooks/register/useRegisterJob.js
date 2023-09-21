@@ -8,7 +8,7 @@ export default function useRegisterJob() {
 
   async function registerJob(id, value) {
     setIsLoading(true);
-    let url = `${apiUrl}:5000/agenda/job/`;
+    let url = `${apiUrl}:8000/agenda/job/`;
 
     const response = await axios
       .post(url, { name: value, id: id })

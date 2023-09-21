@@ -5,6 +5,8 @@ import useUpdateDataUser from "../../hooks/user/useUpdateDataUser";
 import useGetUserById from "../../hooks/user/useGetUserById";
 import { useDispatch } from "react-redux";
 import { addInfoUser } from "../../redux/userSliceDados";
+import InputMask from "react-input-mask";
+import { useToast } from "@chakra-ui/react";
 
 export default function MinhaConta() {
   const state = useSelector((state) => state?.user);
@@ -19,11 +21,13 @@ export default function MinhaConta() {
   const { updateUser } = useUpdateDataUser();
   const { addUser } = useGetUserById();
   const dispatch = useDispatch();
+  const toast = useToast();
 
   useEffect(() => {
     if (state?.isLogged === false) {
       navigate("/");
     } else {
+      console.log(userData.phone);
       setFirstName(userData.firstName);
       setLastName(userData.lastName);
       setEmail(userData.email);
@@ -37,15 +41,29 @@ export default function MinhaConta() {
     event.preventDefault();
 
     try {
-      // eslint-disable-next-line no-unused-vars
-      const dados = await updateUser(state?.id_user, {
+      await updateUser(state?.id_user, {
         firstName: firstName,
         lastName: lastName,
-        phone: phone,
+        phone: phone.replace(/[^0-9]/g, ""),
       });
       const updateReduxUser = await addUser(state?.id_user);
       dispatch(addInfoUser(updateReduxUser));
-    } catch (error) {}
+      toast({
+        title: "Dados atualizados.",
+        description: "Seus dados foram atualizados com sucesso!",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        title: "Ocorreu algum erro.",
+        description: `Error: ${error}`,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -77,7 +95,15 @@ export default function MinhaConta() {
         </div>
         <div className="columnEmail">
           <label>
-            <input type="text" defaultValue={phone} placeholder="Telefone" />
+            <InputMask
+              mask="(99) 99999-9999"
+              type="text"
+              value={phone}
+              placeholder="Telefone"
+              onChange={(event) => {
+                setPhone(event.target.value);
+              }}
+            />
           </label>
           <label>
             <input
@@ -91,7 +117,12 @@ export default function MinhaConta() {
 
         <div className="columnCpfDt">
           <label>
-            <input defaultValue={cpf} disabled placeholder="CPF" />
+            <InputMask
+              mask="999.999.999-99"
+              value={cpf}
+              disabled
+              placeholder="CPF"
+            />
           </label>
           <label>
             <input

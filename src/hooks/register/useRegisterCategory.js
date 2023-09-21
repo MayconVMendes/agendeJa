@@ -8,7 +8,7 @@ export default function useRegisterCategory() {
 
   async function registerCategory(value) {
     setIsLoading(true);
-    let url = `${apiUrl}:5000/agenda/category/`;
+    let url = `${apiUrl}:8000/agenda/category/`;
 
     const response = await axios
       .post(url, { name: value })

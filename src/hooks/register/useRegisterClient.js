@@ -4,7 +4,7 @@ import axios from "axios";
 export default function useLogin() {
   const [loading, setLoading] = useState(false);
   const apiUrl = process.env.REACT_APP_API_AGENDEJA_AWS;
-  const url = `${apiUrl}:5000/agenda/register`;
+  const url = `${apiUrl}:8000/agenda/register`;
   const registerUser = async ({
     email,
     password,
