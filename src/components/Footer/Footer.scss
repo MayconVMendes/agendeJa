@@ -103,3 +103,12 @@
     }
   }
 }
+
+@include desktopview {
+  .footerHome {
+    .logoImg {
+      width: 176px;
+      height: 30px;
+    }
+  }
+}

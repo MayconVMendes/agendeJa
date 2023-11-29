@@ -28,6 +28,7 @@ import CreatePortifolio from "./pages/Empresa/CreatePortifolio/CreatePortifolio"
 import ServicosFilial from "./pages/Empresa/ServicosFilial/ServicosFilial";
 import CreateJob from "./pages/Empresa/CreateJob/CreateJob";
 import Service from "./pages/Service/Service";
+import Catalogo from "./pages/Catalogo/Catalogo";
 
 const router = createBrowserRouter([
   {
@@ -119,6 +120,10 @@ const router = createBrowserRouter([
         path: "/service/details/:id",
         element: <Service />,
       },
+      {
+        path: "/catalogo/:id",
+        element: <Catalogo />,
+      }
     ],
   },
 ]);

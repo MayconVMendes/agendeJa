@@ -131,7 +131,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@include mobileview {
   .pageLogin {
     form {
       label {

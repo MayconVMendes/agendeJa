@@ -1,0 +1,8 @@
+@import "../../../styles/variables";
+
+.chakra-menu__menu-button {
+  cursor: pointer;
+  font-size: 20px;
+  position: absolute;
+  color: $primary-color;
+}

@@ -1,8 +1,11 @@
+@import "../../styles/variables";
+
 html {
   scroll-behavior: smooth;
 }
 
 .divDadUser {
+  padding: 50px;
   .divControlCard {
     display: flex;
     flex-flow: row wrap;
@@ -12,6 +15,12 @@ html {
     .chakra-card {
       max-width: 300px;
       width: 100%;
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: 0px 0px 15px 10px $third-color,0px 10px 15px -3px rgba(0,0,0,0.1);
+        transition: 700ms;
+      }
     }
   }
 }

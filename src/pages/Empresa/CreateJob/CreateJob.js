@@ -74,12 +74,33 @@ export default function CreateJob() {
   }, [isPrice, isDescription]);
 
   async function handleRegister() {
+    let preco = isPrice.replace(/[^0-9]/g, "");
+    preco = preco.slice(0, -2) + "." + isPrice.slice(-2);
     await registerPortifolioJob(
       isJobCategoryName,
-      isPrice,
+      preco,
       valorSelecionado,
       valorSelecionadoTwo,
       isDescription
+    );
+  }
+
+  function mascaraMoeda(event) {
+    const onlyDigits = event.target.value
+      .split("")
+      .filter((s) => /\d/.test(s))
+      .join("")
+      .padStart(3, "0");
+    const digitsFloat = onlyDigits.slice(0, -2) + "." + onlyDigits.slice(-2);
+    event.target.value = maskCurrency(digitsFloat);
+  }
+
+  function maskCurrency(valor, locale = "pt-BR", currency = "BRL") {
+    setIsPrice(
+      new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency,
+      }).format(valor)
     );
   }
 
@@ -166,16 +187,21 @@ export default function CreateJob() {
           <p>Digite a valor do serviço: </p>
           <label>
             <input
-              type="number"
+              type="text"
               value={isPrice}
-              onChange={(event) => setIsPrice(event.target.value)}
+              onChange={(event) => {
+                mascaraMoeda(event);
+              }}
             />
           </label>
         </div>
       )}
       <br />
       {isChange && (
-        <button className="primaryBtn" onClick={() => handleRegister()}>
+        <button className="primaryBtn" onClick={() => {
+          handleRegister()
+          
+        } }>
           Cadastrar
         </button>
       )}

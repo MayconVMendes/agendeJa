@@ -3,9 +3,11 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LogoImg from "../../assets/logo_agendify_blue.svg";
 import "./Header.scss";
-import MenuHeader from "./Menu/MenuHeader";
+import MenuHeader from "./MenuAccount/MenuHeader";
 import DrawerEnterpriseComponent from "../Drawer/DrawerEnterprise";
 import DrawerComponent from "../Drawer/Drawer";
+import BusinessHeader from "../BusinessHeader/BusinessHeader";
+import NavHeader from "./NavHeader";
 
 export default function Header() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -39,6 +41,7 @@ export default function Header() {
         </Link>
         <button
           className="hamburger"
+          
           onClick={() => {
             setIsExpanded(!isExpanded);
           }}
@@ -54,50 +57,22 @@ export default function Header() {
             isExpanded ? "navigation-menu expanded" : "navigation-menu"
           }
         >
-          <ul>
-            <li
-              onClick={() => {
-                setIsExpanded(!isExpanded);
-              }}
-            >
-              <Link to="/" className="anchor">
-                Sobre
-              </Link>
-            </li>
-            <li
-              onClick={() => {
-                setIsExpanded(!isExpanded);
-              }}
-            >
-              <a className="anchor" href="#section03">
-                Funcionalidade
-              </a>
-            </li>
-            <li
-              onClick={() => {
-                setIsExpanded(!isExpanded);
-              }}
-            >
-              <a className="anchor" href="#section05">
-                Clientes
-              </a>
-            </li>
-            <li
-              onClick={() => {
-                setIsExpanded(!isExpanded);
-              }}
-            >
-              <a className="anchor" href="#section06">
-                Suporte
-              </a>
-            </li>
-          </ul>
+          {isEnterprise ? (
+            <p onClick={() => setIsExpanded(!isExpanded)}>
+              <BusinessHeader />
+            </p>
+          ) : (
+            <p onClick={() => setIsExpanded(!isExpanded)}>
+              <NavHeader />
+            </p>
+          )}
         </div>
         {state ? (
           <>
             <div className={state ? "boxLogin user" : "boxLogin"}>
-              <span>Bem vindo {stateUser.firstName}</span>
-              <MenuHeader />
+              <img className="myPhoto" src={stateUser.profileImage} alt="Minha foto"/>
+              <span>Bem vindo {stateUser.firstName}<MenuHeader /></span>
+              
             </div>
 
             {isEnterprise && <DrawerEnterpriseComponent />}

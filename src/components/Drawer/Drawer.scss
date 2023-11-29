@@ -1,8 +1,16 @@
+@import "../../styles/variables";
+
 .chakra-accordion__panel {
   margin-left: 15px;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.04);
     cursor: pointer;
+  }
+}
+
+@include mobileview {
+  .btnEnterprise {
+    margin-right: 55px;
   }
 }

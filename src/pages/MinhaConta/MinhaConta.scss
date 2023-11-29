@@ -1,0 +1,14 @@
+@import "../../styles/variables";
+
+.columnImg.myProfile {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    .myProfile {
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        box-shadow: 0px 0px 15px 19px rgba(0,0,0,0.1);
+    }
+}  

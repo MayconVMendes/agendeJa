@@ -8,6 +8,7 @@ import InputMask from "react-input-mask";
 import { useToast } from "@chakra-ui/react";
 import Loader from "../../components/Loader/Loader";
 import { Checkbox } from "@chakra-ui/react";
+import FileToBase64 from "react-file-base64";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -19,6 +20,8 @@ export default function Login() {
   const [cpf, setCpf] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [switchValue, setSwitchValue] = useState(false);
+  const [image, setImage] = useState(null);
+  const [base64ImageData, setBase64ImageData] = useState("");
   const { registerUser, loading } = useRegisterCliente();
   const navigate = useNavigate();
   const toast = useToast();
@@ -116,6 +119,14 @@ export default function Login() {
               Você é prestador de serviços?
             </FormLabel>
           </FormControl>
+          <div className="columnImg">
+            <FileToBase64
+              value={image}
+              onDone={(base64Data) => {
+                setBase64ImageData(base64Data);
+              }}
+            />
+          </div>
           <div className="columnName">
             <label>
               <input
@@ -207,13 +218,13 @@ export default function Login() {
             </label>
           </div>
           <Checkbox
-              isChecked={showPassword}
-              onChange={() => {
-                setShowPassword(!showPassword);
-              }}
-            >
-              Mostrar senha
-            </Checkbox>
+            isChecked={showPassword}
+            onChange={() => {
+              setShowPassword(!showPassword);
+            }}
+          >
+            Mostrar senha
+          </Checkbox>
           <div className="functions">
             <Link to="/login">Fazer login</Link>
             <button className="primaryBtn" type="submit">

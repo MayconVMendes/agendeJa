@@ -14,6 +14,7 @@ import useDisplayCategory from "../../../../hooks/display/category/useDisplayCat
 import useDisplaySubCategoryById from "../../../../hooks/display/subcategory/useDisplaySubCategoryById";
 import useRegisterCompanyFilial from "../../../../hooks/register/useRegisterCompanyFilial";
 import "./ModalDisplayCatandSubCat.scss";
+import { useToast } from "@chakra-ui/react";
 
 export default function ModalDisplayCatandSubCat({ data }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,6 +30,7 @@ export default function ModalDisplayCatandSubCat({ data }) {
   const [categorySelect, setCategorySelect] = useState(false);
   const [subCategorySelect, setSubCategorySelect] = useState(false);
   const { registerCompanyFilial } = useRegisterCompanyFilial();
+  const toast = useToast();
 
   useEffect(() => {
     if (count === 0) {
@@ -106,19 +108,39 @@ export default function ModalDisplayCatandSubCat({ data }) {
   };
 
   async function handleSubmit() {
-    await registerCompanyFilial(
-      data.fantasyName,
-      data.isCep,
-      data.isLogradouro,
-      data.isComplemento,
-      data.isBairro,
-      data.isCidade,
-      data.isEstado,
-      data.isNumero,
-      data.userId,
-      dados.category,
-      dados.subCategories
-    );
+    try {
+      await registerCompanyFilial(
+        data.fantasyName,
+        data.isCep,
+        data.isLogradouro,
+        data.isComplemento,
+        data.isBairro,
+        data.isCidade,
+        data.isEstado,
+        data.isNumero,
+        data.userId,
+        dados.category,
+        dados.subCategories
+      );
+        toast({
+          title: "Negócio criado.",
+          description: "Seu Negócio foi realizado com sucesso!",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        handleClose();
+        navigate("/filial")
+      
+    } catch (error) {
+      toast({
+        title: "Ocorreu algum erro.",
+        description: `Error: ${error}`,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   }
 
   return (

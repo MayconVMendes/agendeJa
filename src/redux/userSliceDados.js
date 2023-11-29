@@ -15,6 +15,7 @@ export const slice = createSlice({
     createAt: null,
     updateAt: null,
     role: null,
+    profileImage: null,
   },
   reducers: {
     addInfoUser(state, { payload }) {
@@ -32,6 +33,7 @@ export const slice = createSlice({
         createAt: payload.data.createAt,
         updateAt: payload.data.updateAt,
         role: payload.data.role,
+        profileImage: payload.data.profileImage
       };
     },
     removeUser(state) {
@@ -49,6 +51,7 @@ export const slice = createSlice({
         createAt: null,
         updateAt: null,
         role: null,
+        profileImage: null,
       };
     },
   },

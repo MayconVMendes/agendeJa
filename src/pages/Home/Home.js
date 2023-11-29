@@ -6,7 +6,7 @@ import SimpleScheduling from "./containers/simpleScheduling/simpleScheduling";
 import useDisplayAllJobsFromAllEnterprises from "../../hooks/display/enterpriseJob/useDisplayAllJobsFromAllEnterprises";
 import OurClients from "./containers/ourClients/ourClients";
 import PhoneBook from "./containers/phoneBook/phoneBook";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Home.scss";
 import NewsLetter from "./containers/newsLetter/newsLetter";
 import {
@@ -58,6 +58,11 @@ export default function Home() {
     navigate(`/service/details/${jobId}`);
   }
 
+  const formatter = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+
   return (
     <>
       {isUser ? (
@@ -74,27 +79,29 @@ export default function Home() {
                       alt="Green double couch with wooden legs"
                       borderRadius="lg"
                     /> */}
-                      <Stack mt="6" spacing="3">
-                        <Heading size="md">{job.name}</Heading>
-                        <Text>{job.portfolio.companyBranch.name}</Text>
-                        <Text>{job.description}</Text>
-                        <Text color="blue.600" fontSize="2xl">
-                          R$ {job.price}
-                        </Text>
-                        <br /> <hr />
-                        <Text>{job.portfolio.category.name}</Text>
-                        <Text>{job.jobCategory.name}</Text>
-                        <Text>
-                          {
-                            job.portfolio.companyBranch.address.neighborhood
-                              .city.name
-                          }
-                          ,{" "}
-                          {
-                            job.portfolio.companyBranch.address.neighborhood
-                              .city.state.nameAbbreviation
-                          }
-                        </Text>
+                      <Stack mt="6" spacing="3" onClick={()=> {
+                        navigate(`/catalogo/${job.id}`)
+                      }}>
+                          <Heading size="md">{job.name}</Heading>
+                          <Text>{job.portfolio.companyBranch.name}</Text>
+                          <Text>{job.description}</Text>
+                          <Text color="blue.600" fontSize="2xl">
+                            {formatter.format(job.price)}
+                          </Text>
+                          <br /> <hr />
+                          <Text>{job.portfolio.category.name}</Text>
+                          <Text>{job.jobCategory.name}</Text>
+                          <Text>
+                            {
+                              job.portfolio.companyBranch.address.neighborhood
+                                .city.name
+                            }
+                            ,{" "}
+                            {
+                              job.portfolio.companyBranch.address.neighborhood
+                                .city.state.nameAbbreviation
+                            }
+                          </Text>
                       </Stack>
                     </CardBody>
                     <Divider />

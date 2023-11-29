@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { addInfoUser } from "../../redux/userSliceDados";
 import InputMask from "react-input-mask";
 import { useToast } from "@chakra-ui/react";
+import "./MinhaConta.scss";
 
 export default function MinhaConta() {
   const state = useSelector((state) => state?.user);
@@ -18,6 +19,7 @@ export default function MinhaConta() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [cpf, setCpf] = useState("");
+  const [image, setImage] = useState("");
   const { updateUser } = useUpdateDataUser();
   const { addUser } = useGetUserById();
   const dispatch = useDispatch();
@@ -34,6 +36,7 @@ export default function MinhaConta() {
       setCpf(userData.cpf);
       setBirthday(userData.birthday);
       setPhone(userData.phone);
+      setImage(userData.profileImage);
     }
   }, [navigate, state, userData]);
 
@@ -71,6 +74,13 @@ export default function MinhaConta() {
       <h1>Atualize seus dados!</h1>
       <span>Somente estes dados pode ser atualizados</span>
       <form onSubmit={handleSubmit}>
+        <div className="columnImg myProfile">
+          <img
+            className="myProfile"
+            src={image}
+            alt="Minha foto"
+          />
+        </div>
         <div className="columnName">
           <label>
             <input

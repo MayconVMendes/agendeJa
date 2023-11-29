@@ -43,7 +43,7 @@ export default function DrawerEnterpriseComponent() {
   });
 
   return (
-    <>
+    <div className="btnEnterprise">
       <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
         Menu
       </Button>
@@ -185,6 +185,6 @@ export default function DrawerEnterpriseComponent() {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-    </>
+    </div>
   );
 }
