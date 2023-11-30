@@ -29,6 +29,8 @@ import ServicosFilial from "./pages/Empresa/ServicosFilial/ServicosFilial";
 import CreateJob from "./pages/Empresa/CreateJob/CreateJob";
 import Service from "./pages/Service/Service";
 import Catalogo from "./pages/Catalogo/Catalogo";
+import CadastrarEmpresaHorarios from "./pages/CadastrarEmpresaHorario/CadastrarEmpresaHorarios";
+import CadastrarEmpresaDescricao from "./pages/CadastrarEmpresaDescricao/CadastrarEmpresaDescricao";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +57,14 @@ const router = createBrowserRouter([
       {
         path: "/cadastro-empresa/seu-negocio",
         element: <RegistroCategoriaEmpresa />,
+      },
+      {
+        path: "/cadastro-empresa/seu-negocio/horarios",
+        element: <CadastrarEmpresaHorarios />,
+      },
+      {
+        path: "/cadastro-empresa/seu-negocio/horarios/descricao",
+        element: <CadastrarEmpresaDescricao />,
       },
       {
         path: "/minhaconta",

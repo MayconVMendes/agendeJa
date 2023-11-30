@@ -14,6 +14,7 @@ export default function useLogin() {
     lastName,
     cpf,
     isJobProvider,
+    profileImage
   }) => {
     try {
       setLoading(true);
@@ -26,6 +27,7 @@ export default function useLogin() {
         lastName: lastName,
         cpf: cpf,
         isJobProvider: isJobProvider,
+        profileImage: profileImage,
       });
       setLoading(false);
 

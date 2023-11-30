@@ -9,6 +9,10 @@
   flex-direction: column;
   margin-top: 50px;
 
+  @include desktopview {
+    min-height: 353px;
+  }
+
   h1 {
     color: $grayScale333;
   }

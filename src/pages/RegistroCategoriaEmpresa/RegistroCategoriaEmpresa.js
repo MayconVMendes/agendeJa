@@ -85,30 +85,33 @@ export default function RegistroCategoriaEmpresa() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const info = {
-      email: dados.email,
-      password: dados.password,
-      birthday: dados.birthday,
-      phone: dados.phone,
-      firstName: dados.firstName,
-      lastName: dados.lastName,
-      cpf: dados.cpf,
-      hasAddress: dados.hasAddress,
-      cep: dados.cep,
-      logradouro: dados.logradouro,
-      complemento: dados.complemento,
-      bairro: dados.bairro,
-      localidade: dados.localidade,
-      uf: dados.uf,
-      numero: dados.numero,
-      isJobProvider: dados.isJobProvider,
-      imageId: null,
-      fantasyName: dados.fantasyName,
-      category: dados.category,
-      subCategories: dados.subCategories,
-    };
-    await registerUserProvider(info);
-    navigate("/");
+
+    localStorage.setItem("registrarEmpresa", JSON.stringify(dados));
+    navigate("/cadastro-empresa/seu-negocio/horarios");
+    // const info = {
+    //   email: dados.email,
+    //   password: dados.password,
+    //   birthday: dados.birthday,
+    //   phone: dados.phone,
+    //   firstName: dados.firstName,
+    //   lastName: dados.lastName,
+    //   cpf: dados.cpf,
+    //   hasAddress: dados.hasAddress,
+    //   cep: dados.cep,
+    //   logradouro: dados.logradouro,
+    //   complemento: dados.complemento,
+    //   bairro: dados.bairro,
+    //   localidade: dados.localidade,
+    //   uf: dados.uf,
+    //   numero: dados.numero,
+    //   isJobProvider: dados.isJobProvider,
+    //   imageId: null,
+    //   fantasyName: dados.fantasyName,
+    //   category: dados.category,
+    //   subCategories: dados.subCategories,
+    // };
+    // await registerUserProvider(info);
+    // navigate("/");
   };
 
   return (
@@ -169,7 +172,7 @@ export default function RegistroCategoriaEmpresa() {
 
         {subCategorySelect ? (
           <button className="primaryBtn" onClick={handleSubmit}>
-            Concluir cadastro
+            Próximo
           </button>
         ) : (
           ""

@@ -32,6 +32,8 @@ export default function Home() {
     useDisplayAllJobsFromAllEnterprises();
 
   useEffect(() => {
+    localStorage.removeItem("createFilial");
+    localStorage.removeItem("registrarEmpresa");
     if (userData === "USER") {
       setIsUser(true);
     } else {

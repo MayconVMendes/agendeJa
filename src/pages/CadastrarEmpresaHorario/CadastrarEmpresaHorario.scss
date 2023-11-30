@@ -1,0 +1,39 @@
+@import "../../styles/variables";
+
+.containerCentralHorarios {
+  display: grid;
+  justify-content: center;
+  width: 500px;
+
+  .formRegisterHorarios {
+    width: 500px;
+
+    .primaryBtn {
+      margin-top: 40px;
+      padding: 16px 32px;
+      font-weight: 700;
+      font-size: 18px;
+    }
+  }
+
+  .boxHorarios {
+    margin: 10px 0;
+    .labelLine {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .divCheck {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .divHorarios {
+        width: 300px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+    }
+  }
+}

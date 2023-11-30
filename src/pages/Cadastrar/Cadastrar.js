@@ -60,6 +60,7 @@ export default function Login() {
     lastName: lastName,
     cpf: cpf.replace(/[^0-9]/g, ""),
     isJobProvider: switchValue,
+    profileImage: base64ImageData.base64,
   };
 
   const handleSubmit = async (event) => {

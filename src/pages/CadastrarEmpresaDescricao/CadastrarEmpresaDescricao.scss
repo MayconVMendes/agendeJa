@@ -1,0 +1,25 @@
+@import "../../styles/variables";
+
+.containerCentralDescricao {
+  .formRegisterDescricao {
+    margin-top: 25px;
+
+    .primaryBtn {
+      margin-top: 40px;
+      padding: 16px 32px;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    input {
+      display: flex;
+      justify-content: center;
+      padding: 25px;
+      background-color: $grayScalef5f5;
+      border-radius: 15px;
+      height: 280px;
+      width: 600px;
+      text-align: center;
+    }
+  }
+}
