@@ -1,41 +1,47 @@
 import { useNavigate } from "react-router-dom";
 import "./CadastrarEmpresaDescricao.scss";
+import { useState } from "react";
+
+import useRegisterCliente from "../../hooks/register/useRegisterClient";
 
 export default function CadastrarEmpresaDescricao() {
   const navigate = useNavigate();
   const dadosJson = localStorage.getItem("registrarEmpresa");
   const dados = JSON.parse(dadosJson);
+  const [isDescricao, setIsDescricao] = useState("")
+  const {registerUserProvider} = useRegisterCliente();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    localStorage.setItem("registrarEmpresa", JSON.stringify(dados));
-    navigate("/cadastro-empresa/seu-negocio/horarios");
-    // const info = {
-    //   email: dados.email,
-    //   password: dados.password,
-    //   birthday: dados.birthday,
-    //   phone: dados.phone,
-    //   firstName: dados.firstName,
-    //   lastName: dados.lastName,
-    //   cpf: dados.cpf,
-    //   hasAddress: dados.hasAddress,
-    //   cep: dados.cep,
-    //   logradouro: dados.logradouro,
-    //   complemento: dados.complemento,
-    //   bairro: dados.bairro,
-    //   localidade: dados.localidade,
-    //   uf: dados.uf,
-    //   numero: dados.numero,
-    //   isJobProvider: dados.isJobProvider,
-    //   imageId: null,
-    //   fantasyName: dados.fantasyName,
-    //   category: dados.category,
-    //   subCategories: dados.subCategories,
-    // };
-    // await registerUserProvider(info);
-    // navigate("/");
+    const info = {
+      email: dados.email,
+      password: dados.password,
+      birthday: dados.birthday,
+      phone: dados.phone,
+      firstName: dados.firstName,
+      lastName: dados.lastName,
+      cpf: dados.cpf,
+      hasAddress: dados.hasAddress,
+      cep: dados.cep,
+      logradouro: dados.logradouro,
+      complemento: dados.complemento,
+      bairro: dados.bairro,
+      localidade: dados.localidade,
+      uf: dados.uf,
+      numero: dados.numero,
+      isJobProvider: dados.isJobProvider,
+      profileImage: dados.profileImage,
+      coverImage: null,
+      fantasyName: dados.fantasyName,
+      category: dados.category,
+      subCategories: dados.subCategories,
+      hours: dados.hours,
+      is24Hours: dados.is24Hours,
+      description: isDescricao
+    };
+    await registerUserProvider(info);
   };
+  
 
   return (
     <div className="firstStepContainer">
@@ -45,7 +51,12 @@ export default function CadastrarEmpresaDescricao() {
 
         <form onSubmit={handleSubmit} className="formRegisterDescricao">
           <label>
-            <input type="text" placeholder="Descrição da sua trajetória" />
+            <input
+              type="text"
+              placeholder="Descrição da sua trajetória(opcional)"
+              value={isDescricao}
+              onChange={(event) => setIsDescricao(event.target.value)}
+            />
           </label>
           <button className="primaryBtn" type="submit">
             Cadastrar

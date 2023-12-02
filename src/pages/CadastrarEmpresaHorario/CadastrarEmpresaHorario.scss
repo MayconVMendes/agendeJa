@@ -33,6 +33,10 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
+
+        input[type="time"]::-webkit-calendar-picker-minutes {
+          display: none;
+        }
       }
     }
   }

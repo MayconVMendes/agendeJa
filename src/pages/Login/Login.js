@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { changeUser } from "../../redux/userSlice";
 import { addInfoUser } from "../../redux/userSliceDados";
 import { useNavigate } from "react-router-dom";
+import useTokenVerify from "../../hooks/login/useTokenVerify";
 import Loader from "../../components/Loader/Loader";
 
 export default function Login() {
@@ -20,6 +21,7 @@ export default function Login() {
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorSenha, setErrorSenha] = useState(false);
   const { performLogin, loading } = useLogin();
+  const {searchTokenUser} = useTokenVerify();
   const { addUser } = useGetUserById();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -53,8 +55,9 @@ export default function Login() {
     } else {
       try {
         const dados = await performLogin(loginData);
-        const dadosUser = await addUser(dados.message);
-
+        const dadosToken = await searchTokenUser(dados.token);
+        const dadosUser = await addUser(dadosToken.id, dados.token);
+        localStorage.setItem("token", JSON.stringify(dados));
         dispatch(changeUser(dados.message));
         dispatch(addInfoUser(dadosUser));
 

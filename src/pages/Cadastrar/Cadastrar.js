@@ -20,8 +20,8 @@ export default function Login() {
   const [cpf, setCpf] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [switchValue, setSwitchValue] = useState(false);
-  const [image, setImage] = useState(null);
-  const [base64ImageData, setBase64ImageData] = useState("");
+  const [image, ] = useState(null);
+  const [base64ImageData, setBase64ImageData] = useState(null);
   const { registerUser, loading } = useRegisterCliente();
   const navigate = useNavigate();
   const toast = useToast();
@@ -60,7 +60,7 @@ export default function Login() {
     lastName: lastName,
     cpf: cpf.replace(/[^0-9]/g, ""),
     isJobProvider: switchValue,
-    profileImage: base64ImageData.base64,
+    profileImage: base64ImageData?.base64,
   };
 
   const handleSubmit = async (event) => {

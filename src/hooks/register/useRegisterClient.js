@@ -40,25 +40,29 @@ export default function useLogin() {
 
   const registerUserProvider = async ({
     email,
-    password,
-    birthday,
-    phone,
-    firstName,
-    lastName,
-    cpf,
-    hasAddress,
-    cep,
-    logradouro,
-    complemento,
-    bairro,
-    localidade,
-    uf,
-    numero,
-    isJobProvider,
-    image,
-    fantasyName,
-    category,
-    subCategories,
+      password,
+      birthday,
+      phone,
+      firstName,
+      lastName,
+      cpf,
+      hasAddress,
+      cep,
+      logradouro,
+      complemento,
+      bairro,
+      localidade,
+      uf,
+      numero,
+      isJobProvider,
+      profileImage,
+      coverImage,
+      fantasyName,
+      category,
+      subCategories,
+      hours,
+      is24Hours,
+      description
   }) => {
     try {
       if (hasAddress === false) {
@@ -73,10 +77,14 @@ export default function useLogin() {
           hasAddress: hasAddress,
           address: {},
           isJobProvider: isJobProvider,
-          imageId: null,
+          profileImage: profileImage,
+          coverImage: coverImage,
           fantasyName: fantasyName,
           category: category,
           subCategories: subCategories,
+          hours: hours,
+          is24Hours: is24Hours,
+          description: description
         });
 
         return response.data;
@@ -100,10 +108,14 @@ export default function useLogin() {
             numero: numero,
           },
           isJobProvider: isJobProvider,
-          imageId: null,
+          profileImage: profileImage,
+          coverImage: coverImage,
           fantasyName: fantasyName,
           category: category,
           subCategories: subCategories,
+          hours: hours,
+          is24Hours: is24Hours,
+          description: description
         });
 
         return response.data;

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Switch, FormControl, FormLabel } from "@chakra-ui/react";
 import "./CadastrarEmpresaHorario.scss";
 
@@ -9,18 +9,73 @@ export default function CadastrarEmpresaHorarios() {
   const dados = JSON.parse(dadosJson);
   const [switchValue, setSwitchValue] = useState(false);
   const [segunda, setSegunda] = useState(false);
+  const [segundaHoraInicio, setSegundaHoraInicio] = useState("00:00");
+  const [segundaHoraFim, setSegundaHoraFim] = useState("00:00");
   const [terca, setTerca] = useState(false);
+  const [tercaHoraInicio, setTercaHoraInicio] = useState("00:00");
+  const [tercaHoraFim, setTercaHoraFim] = useState("00:00");
   const [quarta, setQuarta] = useState(false);
+  const [quartaHoraInicio, setQuartaHoraInicio] = useState("00:00");
+  const [quartaHoraFim, setQuartaHoraFim] = useState("00:00");
   const [quinta, setQuinta] = useState(false);
+  const [quintaHoraInicio, setQuintaHoraInicio] = useState("00:00");
+  const [quintaHoraFim, setQuintaHoraFim] = useState("00:00");
   const [sexta, setSexta] = useState(false);
+  const [sextaHoraInicio, setSextaHoraInicio] = useState("00:00");
+  const [sextaHoraFim, setSextaHoraFim] = useState("00:00");
   const [sabado, setSabado] = useState(false);
+  const [sabadoHoraInicio, setSabadoHoraInicio] = useState("00:00");
+  const [sabadoHoraFim, setSabadoHoraFim] = useState("00:00");
   const [domingo, setDomingo] = useState(false);
+  const [domingoHoraInicio, setDomingoHoraInicio] = useState("00:00");
+  const [domingoHoraFim, setDomingoHoraFim] = useState("00:00");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    console.log(segundaHoraInicio);
+    dados.is24Hours = switchValue;
+    dados.hours = [
+      {
+        dayOfWeek: "MONDAY",
+        start: segundaHoraInicio,
+        end: segundaHoraFim,
+      },
+      {
+        dayOfWeek: "TUESDAY",
+        start: tercaHoraInicio,
+        end: tercaHoraFim,
+      },
+      {
+        dayOfWeek: "WEDNESDAY",
+        start: quartaHoraInicio,
+        end: quartaHoraFim,
+      },
+      {
+        dayOfWeek: "THURSDAY",
+        start: quintaHoraInicio,
+        end: quintaHoraFim,
+      },
+      {
+        dayOfWeek: "FRIDAY",
+        start: sextaHoraInicio,
+        end: sextaHoraFim,
+      },
+      {
+        dayOfWeek: "SATURDAY",
+        start: sabadoHoraInicio,
+        end: sabadoHoraFim,
+      },
+      {
+        dayOfWeek: "SUNDAY",
+        start: domingoHoraInicio,
+        end: domingoHoraFim,
+      },
+    ];
     localStorage.setItem("registrarEmpresa", JSON.stringify(dados));
     navigate("/cadastro-empresa/seu-negocio/horarios/descricao");
   };
+
   return (
     <div className="firstStepContainer">
       <div className="containerCentralHorarios">
@@ -57,9 +112,23 @@ export default function CadastrarEmpresaHorarios() {
                   </div>
                   {segunda ? (
                     <div className="divHorarios">
-                      <input type="time" placeholder="Inicio" />
+                      <input
+                        type="time"
+                        value={segundaHoraInicio}
+                        onChange={(event) =>
+                          setSegundaHoraInicio(event.target.value)
+                        }
+                        placeholder="Inicio"
+                      />
                       -
-                      <input type="time" placeholder="Fim" />
+                      <input
+                        type="time"
+                        value={segundaHoraFim}
+                        onChange={(event) =>
+                          setSegundaHoraFim(event.target.value)
+                        }
+                        placeholder="Fim"
+                      />
                     </div>
                   ) : (
                     ""
@@ -78,9 +147,23 @@ export default function CadastrarEmpresaHorarios() {
                   </div>
                   {terca ? (
                     <div className="divHorarios">
-                      <input type="time" placeholder="Inicio" />
+                      <input
+                        type="time"
+                        value={tercaHoraInicio}
+                        onChange={(event) =>
+                          setTercaHoraInicio(event.target.value)
+                        }
+                        placeholder="Inicio"
+                      />
                       -
-                      <input type="time" placeholder="Fim" />
+                      <input
+                        type="time"
+                        value={tercaHoraFim}
+                        onChange={(event) =>
+                          setTercaHoraFim(event.target.value)
+                        }
+                        placeholder="Fim"
+                      />
                     </div>
                   ) : (
                     ""
@@ -99,9 +182,23 @@ export default function CadastrarEmpresaHorarios() {
                   </div>
                   {quarta ? (
                     <div className="divHorarios">
-                      <input type="time" placeholder="Inicio" />
+                      <input
+                        type="time"
+                        value={quartaHoraInicio}
+                        onChange={(event) =>
+                          setQuartaHoraInicio(event.target.value)
+                        }
+                        placeholder="Inicio"
+                      />
                       -
-                      <input type="time" placeholder="Fim" />
+                      <input
+                        type="time"
+                        value={quartaHoraFim}
+                        onChange={(event) =>
+                          setQuartaHoraFim(event.target.value)
+                        }
+                        placeholder="Fim"
+                      />
                     </div>
                   ) : (
                     ""
@@ -120,9 +217,23 @@ export default function CadastrarEmpresaHorarios() {
                   </div>
                   {quinta ? (
                     <div className="divHorarios">
-                      <input type="time" placeholder="Inicio" />
+                      <input
+                        type="time"
+                        value={quintaHoraInicio}
+                        onChange={(event) =>
+                          setQuintaHoraInicio(event.target.value)
+                        }
+                        placeholder="Inicio"
+                      />
                       -
-                      <input type="time" placeholder="Fim" />
+                      <input
+                        type="time"
+                        value={quintaHoraFim}
+                        onChange={(event) =>
+                          setQuintaHoraFim(event.target.value)
+                        }
+                        placeholder="Fim"
+                      />
                     </div>
                   ) : (
                     ""
@@ -141,9 +252,23 @@ export default function CadastrarEmpresaHorarios() {
                   </div>
                   {sexta ? (
                     <div className="divHorarios">
-                      <input type="time" placeholder="Inicio" />
+                      <input
+                        type="time"
+                        value={sextaHoraInicio}
+                        onChange={(event) =>
+                          setSextaHoraInicio(event.target.value)
+                        }
+                        placeholder="Inicio"
+                      />
                       -
-                      <input type="time" placeholder="Fim" />
+                      <input
+                        type="time"
+                        value={sextaHoraFim}
+                        onChange={(event) =>
+                          setSextaHoraFim(event.target.value)
+                        }
+                        placeholder="Fim"
+                      />
                     </div>
                   ) : (
                     ""
@@ -162,9 +287,23 @@ export default function CadastrarEmpresaHorarios() {
                   </div>
                   {sabado ? (
                     <div className="divHorarios">
-                      <input type="time" placeholder="Inicio" />
+                      <input
+                        type="time"
+                        value={sabadoHoraInicio}
+                        onChange={(event) =>
+                          setSabadoHoraInicio(event.target.value)
+                        }
+                        placeholder="Inicio"
+                      />
                       -
-                      <input type="time" placeholder="Fim" />
+                      <input
+                        type="time"
+                        value={sabadoHoraFim}
+                        onChange={(event) =>
+                          setSabadoHoraFim(event.target.value)
+                        }
+                        placeholder="Fim"
+                      />
                     </div>
                   ) : (
                     ""
@@ -183,9 +322,23 @@ export default function CadastrarEmpresaHorarios() {
                   </div>
                   {domingo ? (
                     <div className="divHorarios">
-                      <input type="time" placeholder="Inicio" />
+                      <input
+                        type="time"
+                        value={domingoHoraInicio}
+                        onChange={(event) =>
+                          setDomingoHoraInicio(event.target.value)
+                        }
+                        placeholder="Inicio"
+                      />
                       -
-                      <input type="time" placeholder="Fim" />
+                      <input
+                        type="time"
+                        value={domingoHoraFim}
+                        onChange={(event) =>
+                          setDomingoHoraFim(event.target.value)
+                        }
+                        placeholder="Fim"
+                      />
                     </div>
                   ) : (
                     ""

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useDisplayCategory from "../../hooks/display/category/useDisplayCategory";
 import useDisplaySubCategoryById from "../../hooks/display/subcategory/useDisplaySubCategoryById";
-import useRegisterCliente from "../../hooks/register/useRegisterClient";
 import "./RegistroCategoriaEmpresa.scss";
 
 export default function RegistroCategoriaEmpresa() {
@@ -16,7 +15,6 @@ export default function RegistroCategoriaEmpresa() {
   const [isSubCategory, setIsSubCategory] = useState(false);
   const [categorySelect, setCategorySelect] = useState(false);
   const [subCategorySelect, setSubCategorySelect] = useState(false);
-  const { registerUserProvider } = useRegisterCliente();
 
   useEffect(() => {
     if (!dados.fantasyName) {
@@ -85,33 +83,7 @@ export default function RegistroCategoriaEmpresa() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    localStorage.setItem("registrarEmpresa", JSON.stringify(dados));
     navigate("/cadastro-empresa/seu-negocio/horarios");
-    // const info = {
-    //   email: dados.email,
-    //   password: dados.password,
-    //   birthday: dados.birthday,
-    //   phone: dados.phone,
-    //   firstName: dados.firstName,
-    //   lastName: dados.lastName,
-    //   cpf: dados.cpf,
-    //   hasAddress: dados.hasAddress,
-    //   cep: dados.cep,
-    //   logradouro: dados.logradouro,
-    //   complemento: dados.complemento,
-    //   bairro: dados.bairro,
-    //   localidade: dados.localidade,
-    //   uf: dados.uf,
-    //   numero: dados.numero,
-    //   isJobProvider: dados.isJobProvider,
-    //   imageId: null,
-    //   fantasyName: dados.fantasyName,
-    //   category: dados.category,
-    //   subCategories: dados.subCategories,
-    // };
-    // await registerUserProvider(info);
-    // navigate("/");
   };
 
   return (
