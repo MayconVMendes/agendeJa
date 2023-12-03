@@ -36,6 +36,7 @@ export default function MenuHeader() {
               onClick={() => {
                 dispatch(logout());
                 dispatch(removeUser());
+                localStorage.removeItem("token");
               }}
             >
               Sair

@@ -20,6 +20,7 @@ import useRegisterPortifolioJob from "../../../hooks/register/useRegisterPortfol
 import useDisplayCompanyPortiByUserId from "../../../hooks/display/company/useDisplayCompanyPortiByUserId.js";
 import useDisplayCategory from "../../../hooks/display/category/useDisplayCategory.js";
 import useDisplaySubCategoryById from "../../../hooks/display/subcategory/useDisplaySubCategoryById.js";
+import useDisplayJobAllBySubcategoryId from "../../../hooks/display/job/useDisplayJobAllBySubcategoryId.js";
 import { useNavigate } from "react-router-dom";
 import FileToBase64 from "react-file-base64";
 
@@ -29,6 +30,7 @@ export default function CreateService({ openModal, handleCloseModal }) {
   const [isFilial, setIsFilial] = useState(false);
   const [isFilialSelect, setIsFilialSelect] = useState(false);
   const [isDisplayCompany, setDisplayCompany] = useState(false);
+  const [isJobSubcategory, setIsJobSubcategory] = useState(false);
   const [isSubCategory, setIsSubCategory] = useState(false);
   const [subCategorySelect, setSubCategorySelect] = useState(false);
   const [isJobCategoryName, setIsJobCategoryName] = useState("");
@@ -41,14 +43,37 @@ export default function CreateService({ openModal, handleCloseModal }) {
   const [base64ImageData2, setBase64ImageData2] = useState("");
   const [image3, setImage3] = useState(null);
   const [base64ImageData3, setBase64ImageData3] = useState("");
+  const [segunda, setSegunda] = useState(false);
+  const [segundaHoraInicio, setSegundaHoraInicio] = useState("00:00");
+  const [segundaHoraFim, setSegundaHoraFim] = useState("00:00");
+  const [terca, setTerca] = useState(false);
+  const [tercaHoraInicio, setTercaHoraInicio] = useState("00:00");
+  const [tercaHoraFim, setTercaHoraFim] = useState("00:00");
+  const [quarta, setQuarta] = useState(false);
+  const [quartaHoraInicio, setQuartaHoraInicio] = useState("00:00");
+  const [quartaHoraFim, setQuartaHoraFim] = useState("00:00");
+  const [quinta, setQuinta] = useState(false);
+  const [quintaHoraInicio, setQuintaHoraInicio] = useState("00:00");
+  const [quintaHoraFim, setQuintaHoraFim] = useState("00:00");
+  const [sexta, setSexta] = useState(false);
+  const [sextaHoraInicio, setSextaHoraInicio] = useState("00:00");
+  const [sextaHoraFim, setSextaHoraFim] = useState("00:00");
+  const [sabado, setSabado] = useState(false);
+  const [sabadoHoraInicio, setSabadoHoraInicio] = useState("00:00");
+  const [sabadoHoraFim, setSabadoHoraFim] = useState("00:00");
+  const [domingo, setDomingo] = useState(false);
+  const [domingoHoraInicio, setDomingoHoraInicio] = useState("00:00");
+  const [domingoHoraFim, setDomingoHoraFim] = useState("00:00");
   const userData = useSelector((state) => state?.userDados);
   const dadosJson = localStorage.getItem("registrarPort");
+  const tokenStorage = JSON.parse(localStorage.getItem("token"));
   const dados = JSON.parse(dadosJson);
   const { registerPortifolio } = useRegisterPortifolio();
   const { registerPortifolioJob } = useRegisterPortifolioJob();
   const { displayCompanyPortiByUserId } = useDisplayCompanyPortiByUserId();
   const { displayCategory } = useDisplayCategory();
   const { displaySubCategoryById } = useDisplaySubCategoryById();
+  const { displayJobAllBySubcategoryId } = useDisplayJobAllBySubcategoryId();
   const navigate = useNavigate();
   const toast = useToast();
 
@@ -81,7 +106,6 @@ export default function CreateService({ openModal, handleCloseModal }) {
   async function searchDisplayCompanyPortiByUserId() {
     let resultCategory = await displayCompanyPortiByUserId(userData?.id);
     setDisplayCompany(resultCategory);
-    console.log(resultCategory);
   }
 
   function btnNext() {
@@ -109,9 +133,18 @@ export default function CreateService({ openModal, handleCloseModal }) {
       btn.classList.add("selected");
       dados.category = name.id;
       dados.subCategories = [];
+      searchDisplayJobAllBySubcategoryId(name.id);
 
       localStorage.setItem("registrarPort", JSON.stringify(dados));
     }
+  }
+
+  async function searchDisplayJobAllBySubcategoryId(id) {
+    let resultJobCategory = await displayJobAllBySubcategoryId(
+      id,
+      tokenStorage.token
+    );
+    setIsJobSubcategory(resultJobCategory);
   }
 
   function selectJobCategory(name) {
@@ -152,8 +185,7 @@ export default function CreateService({ openModal, handleCloseModal }) {
     );
   }
 
-  function submit() {
-  }
+  function submit() {}
 
   return (
     <>
@@ -188,15 +220,12 @@ export default function CreateService({ openModal, handleCloseModal }) {
                                   return (
                                     <button
                                       className="ghostBtn"
-                                      id={nameSubCategory.id + 10}
+                                      id={nameSubCategory.id}
                                       key={nameSubCategory.id}
                                       disabled={false}
                                       onClick={() => {
-                                        selectSubCategory(nameSubCategory)
-                                        console.log(nameSubCategory);
-                                      }
-
-                                      }
+                                        selectSubCategory(nameSubCategory);
+                                      }}
                                     >
                                       {nameSubCategory?.name}
                                     </button>
@@ -208,7 +237,7 @@ export default function CreateService({ openModal, handleCloseModal }) {
                         })}
                       </div>
 
-                      {isSubCategory ? (
+                      {isJobSubcategory ? (
                         <div className="subCategorieTitle">
                           <p>
                             Selecione a <b>subcategoria</b> do seu negócio{" "}
@@ -219,28 +248,29 @@ export default function CreateService({ openModal, handleCloseModal }) {
                         ""
                       )}
 
-                      {isSubCategory ? (
+                      {isJobSubcategory ? (
                         <div className="subCategoryInfos">
-                          {isDisplayCompany?.data?.map((subCategory) => {
+                          {isJobSubcategory?.data?.map((jobSubCategory) => {
                             return (
                               <>
-                                {subCategory?.subCategories?.map(
+                                <button
+                                  className="ghostBtn"
+                                  id={jobSubCategory.id + 10}
+                                  key={jobSubCategory.id}
+                                  disabled={false}
+                                  onClick={() =>
+                                    selectJobCategory(jobSubCategory)
+                                  }
+                                >
+                                  {jobSubCategory?.name}
+                                </button>
+                                {/* {jobSubCategory?.subCategories?.map(
                                   (nameSubCategory) => {
                                     return (
-                                      <button
-                                        className="ghostBtn"
-                                        id={nameSubCategory.id + 10}
-                                        key={nameSubCategory.id}
-                                        disabled={false}
-                                        onClick={() =>
-                                          selectJobCategory(nameSubCategory)
-                                        }
-                                      >
-                                        {nameSubCategory?.name}
-                                      </button>
+                                      
                                     );
                                   }
-                                )}
+                                )} */}
                               </>
                             );
                           })}
@@ -284,6 +314,10 @@ export default function CreateService({ openModal, handleCloseModal }) {
                         <option value={2}>2 horas</option>
                         <option value={3}>3 horas</option>
                         <option value={4}>4 horas</option>
+                        <option value={5}>5 horas</option>
+                        <option value={6}>6 horas</option>
+                        <option value={7}>7 horas</option>
+                        <option value={8}>8 horas</option>
                       </select>
                     </label>
                     <label className="labelDescription">
@@ -302,6 +336,263 @@ export default function CreateService({ openModal, handleCloseModal }) {
                 )}
                 {page === 3 ? (
                   <div className="boxPageThree">
+                    <h2>Defina a disponibilidade de horários</h2>
+                    <p>
+                      <b>Atenção:</b> Dias sem restrição de horário poderão ser <br/>
+                      agendados durante o horário de atendimento delimitado.
+                    </p>
+                    <div className="boxsImages">
+                    <div className="boxHorarios">
+                <label className="labelLine">
+                  <div className="divCheck">
+                    <input
+                      type="checkbox"
+                      isChecked={segunda}
+                      onChange={() => setSegunda(!segunda)}
+                    />
+                    Segunda-Feira
+                  </div>
+                  {segunda ? (
+                    <div className="divHorarios">
+                      <input
+                        type="time"
+                        value={segundaHoraInicio}
+                        onChange={(event) =>
+                          setSegundaHoraInicio(event.target.value)
+                        }
+                        placeholder="Inicio"
+                      />
+                      -
+                      <input
+                        type="time"
+                        value={segundaHoraFim}
+                        onChange={(event) =>
+                          setSegundaHoraFim(event.target.value)
+                        }
+                        placeholder="Fim"
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </label>
+              </div>
+              <div className="boxHorarios">
+                <label className="labelLine">
+                  <div className="divCheck">
+                    <input
+                      type="checkbox"
+                      isChecked={terca}
+                      onChange={() => setTerca(!terca)}
+                    />
+                    Terça-Feira
+                  </div>
+                  {terca ? (
+                    <div className="divHorarios">
+                      <input
+                        type="time"
+                        value={tercaHoraInicio}
+                        onChange={(event) =>
+                          setTercaHoraInicio(event.target.value)
+                        }
+                        placeholder="Inicio"
+                      />
+                      -
+                      <input
+                        type="time"
+                        value={tercaHoraFim}
+                        onChange={(event) =>
+                          setTercaHoraFim(event.target.value)
+                        }
+                        placeholder="Fim"
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </label>
+              </div>
+              <div className="boxHorarios">
+                <label className="labelLine">
+                  <div className="divCheck">
+                    <input
+                      type="checkbox"
+                      isChecked={quarta}
+                      onChange={() => setQuarta(!quarta)}
+                    />
+                    Quarta-Feira
+                  </div>
+                  {quarta ? (
+                    <div className="divHorarios">
+                      <input
+                        type="time"
+                        value={quartaHoraInicio}
+                        onChange={(event) =>
+                          setQuartaHoraInicio(event.target.value)
+                        }
+                        placeholder="Inicio"
+                      />
+                      -
+                      <input
+                        type="time"
+                        value={quartaHoraFim}
+                        onChange={(event) =>
+                          setQuartaHoraFim(event.target.value)
+                        }
+                        placeholder="Fim"
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </label>
+              </div>
+              <div className="boxHorarios">
+                <label className="labelLine">
+                  <div className="divCheck">
+                    <input
+                      type="checkbox"
+                      isChecked={quinta}
+                      onChange={() => setQuinta(!quinta)}
+                    />
+                    Quinta-Feira
+                  </div>
+                  {quinta ? (
+                    <div className="divHorarios">
+                      <input
+                        type="time"
+                        value={quintaHoraInicio}
+                        onChange={(event) =>
+                          setQuintaHoraInicio(event.target.value)
+                        }
+                        placeholder="Inicio"
+                      />
+                      -
+                      <input
+                        type="time"
+                        value={quintaHoraFim}
+                        onChange={(event) =>
+                          setQuintaHoraFim(event.target.value)
+                        }
+                        placeholder="Fim"
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </label>
+              </div>
+              <div className="boxHorarios">
+                <label className="labelLine">
+                  <div className="divCheck">
+                    <input
+                      type="checkbox"
+                      isChecked={sexta}
+                      onChange={() => setSexta(!sexta)}
+                    />
+                    Sexta-Feira
+                  </div>
+                  {sexta ? (
+                    <div className="divHorarios">
+                      <input
+                        type="time"
+                        value={sextaHoraInicio}
+                        onChange={(event) =>
+                          setSextaHoraInicio(event.target.value)
+                        }
+                        placeholder="Inicio"
+                      />
+                      -
+                      <input
+                        type="time"
+                        value={sextaHoraFim}
+                        onChange={(event) =>
+                          setSextaHoraFim(event.target.value)
+                        }
+                        placeholder="Fim"
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </label>
+              </div>
+              <div className="boxHorarios">
+                <label className="labelLine">
+                  <div className="divCheck">
+                    <input
+                      type="checkbox"
+                      isChecked={sabado}
+                      onChange={() => setSabado(!sabado)}
+                    />
+                    Sabado
+                  </div>
+                  {sabado ? (
+                    <div className="divHorarios">
+                      <input
+                        type="time"
+                        value={sabadoHoraInicio}
+                        onChange={(event) =>
+                          setSabadoHoraInicio(event.target.value)
+                        }
+                        placeholder="Inicio"
+                      />
+                      -
+                      <input
+                        type="time"
+                        value={sabadoHoraFim}
+                        onChange={(event) =>
+                          setSabadoHoraFim(event.target.value)
+                        }
+                        placeholder="Fim"
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </label>
+              </div>
+              <div className="boxHorarios">
+                <label className="labelLine">
+                  <div className="divCheck">
+                    <input
+                      type="checkbox"
+                      isChecked={domingo}
+                      onChange={() => setDomingo(!domingo)}
+                    />
+                    Domingo
+                  </div>
+                  {domingo ? (
+                    <div className="divHorarios">
+                      <input
+                        type="time"
+                        value={domingoHoraInicio}
+                        onChange={(event) =>
+                          setDomingoHoraInicio(event.target.value)
+                        }
+                        placeholder="Inicio"
+                      />
+                      -
+                      <input
+                        type="time"
+                        value={domingoHoraFim}
+                        onChange={(event) =>
+                          setDomingoHoraFim(event.target.value)
+                        }
+                        placeholder="Fim"
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </label>
+              </div></div>{" "}
+                  </div>
+                ) : (
+                  ""
+                )}
+                {page === 4 ? (
+                  <div className="boxPageFour">
                     <h2>Adicionar fotos (Máx. 3)</h2>
                     <div className="boxsImages">
                       <div>
@@ -333,8 +624,8 @@ export default function CreateService({ openModal, handleCloseModal }) {
                 ) : (
                   ""
                 )}
-                {page === 4 ? (
-                  <div className="boxPageFour">
+                {page === 5 ? (
+                  <div className="boxPageFive">
                     <h2>Revisão de dados</h2>
                     <div className="boxDados">
                       <div className="boxCategService">
@@ -402,10 +693,7 @@ export default function CreateService({ openModal, handleCloseModal }) {
               </>
             ) : (
               <>
-                <Button
-                  colorScheme="blue"
-                  onClick={() => btnNext()}
-                >
+                <Button colorScheme="blue" onClick={() => btnNext()}>
                   Próxima etapa
                 </Button>
               </>

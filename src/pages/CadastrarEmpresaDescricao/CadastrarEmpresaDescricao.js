@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "./CadastrarEmpresaDescricao.scss";
 import { useState } from "react";
-
+import { useToast } from "@chakra-ui/react";
 import useRegisterCliente from "../../hooks/register/useRegisterClient";
 
 export default function CadastrarEmpresaDescricao() {
@@ -10,6 +10,7 @@ export default function CadastrarEmpresaDescricao() {
   const dados = JSON.parse(dadosJson);
   const [isDescricao, setIsDescricao] = useState("")
   const {registerUserProvider} = useRegisterCliente();
+  const toast = useToast();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -40,6 +41,14 @@ export default function CadastrarEmpresaDescricao() {
       description: isDescricao
     };
     await registerUserProvider(info);
+    toast({
+      title: "Conta criada.",
+      description: "Seu cadastro foi realizado com sucesso!",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+    navigate("/")
   };
   
 
