@@ -75,7 +75,7 @@ export default function Header() {
               
             </div>
 
-            {isEnterprise && <DrawerEnterpriseComponent />}
+            {/* {isEnterprise && <DrawerEnterpriseComponent />} */}
             {isAdm && <DrawerComponent />}
           </>
         ) : (

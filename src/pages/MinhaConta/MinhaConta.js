@@ -24,6 +24,7 @@ export default function MinhaConta() {
   const { addUser } = useGetUserById();
   const dispatch = useDispatch();
   const toast = useToast();
+  const tokenStorage = JSON.parse(localStorage.getItem("token"));
 
   useEffect(() => {
     if (state?.isLogged === false) {
@@ -44,12 +45,12 @@ export default function MinhaConta() {
     event.preventDefault();
 
     try {
-      await updateUser(state?.id_user, {
+      await updateUser(state?.id_user, tokenStorage.token, {
         firstName: firstName,
         lastName: lastName,
         phone: phone.replace(/[^0-9]/g, ""),
       });
-      const updateReduxUser = await addUser(state?.id_user);
+      const updateReduxUser = await addUser(state?.id_user, tokenStorage.token);
       dispatch(addInfoUser(updateReduxUser));
       toast({
         title: "Dados atualizados.",
@@ -58,6 +59,7 @@ export default function MinhaConta() {
         duration: 3000,
         isClosable: true,
       });
+      navigate("/")
     } catch (error) {
       toast({
         title: "Ocorreu algum erro.",
@@ -75,11 +77,7 @@ export default function MinhaConta() {
       <span>Somente estes dados pode ser atualizados</span>
       <form onSubmit={handleSubmit}>
         <div className="columnImg myProfile">
-          <img
-            className="myProfile"
-            src={image}
-            alt="Minha foto"
-          />
+          <img className="myProfile" src={image} alt="Minha foto" />
         </div>
         <div className="columnName">
           <label>
