@@ -60,9 +60,9 @@ export default function Home() {
     navigate(`/service/details/${jobId}`);
   }
 
-  const formatter = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
+  const formatter = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
   });
 
   return (
@@ -71,7 +71,7 @@ export default function Home() {
         <div className="divDadUser">
           <div className="divControlCard">
             {isData &&
-              isData.data?.map((job) => {
+              isData.map((job) => {
                 return (
                   <Card maxW="sm" key={job.id}>
                     {" "}
@@ -81,29 +81,33 @@ export default function Home() {
                       alt="Green double couch with wooden legs"
                       borderRadius="lg"
                     /> */}
-                      <Stack mt="6" spacing="3" onClick={()=> {
-                        navigate(`/catalogo/${job.id}`)
-                      }}>
-                          <Heading size="md">{job.name}</Heading>
-                          <Text>{job.portfolio.companyBranch.name}</Text>
-                          <Text>{job.description}</Text>
-                          <Text color="blue.600" fontSize="2xl">
-                            {formatter.format(job.price)}
-                          </Text>
-                          <br /> <hr />
-                          <Text>{job.portfolio.category.name}</Text>
-                          <Text>{job.jobCategory.name}</Text>
-                          <Text>
-                            {
-                              job.portfolio.companyBranch.address.neighborhood
+                      <Stack
+                        mt="6"
+                        spacing="3"
+                        onClick={() => {
+                          navigate(`/catalogo/${job.id}`);
+                        }}
+                      >
+                        <Heading size="md">{job?.name}</Heading>
+                        <Text>{job?.description}</Text>
+                        <Text color="blue.600" fontSize="2xl">
+                          {formatter.format(job?.price)}
+                        </Text>
+                        <br /> <hr />
+                        <Text>Duração: {job?.duration}</Text>
+                        <Text>{job?.category}</Text>
+                        <Text>{job?.jobCategory}</Text>
+                        <Text>
+                          {/* {
+                              job?.portfolio.companyBranch.address.neighborhood
                                 .city.name
                             }
                             ,{" "}
                             {
-                              job.portfolio.companyBranch.address.neighborhood
+                              job?.portfolio.companyBranch.address.neighborhood
                                 .city.state.nameAbbreviation
-                            }
-                          </Text>
+                            } */}
+                        </Text>
                       </Stack>
                     </CardBody>
                     <Divider />
@@ -126,10 +130,10 @@ export default function Home() {
       ) : (
         <>
           <SimpleScheduling />
-          <WhatSchedule />
-          <EverythingYouNeed />
-          <NotebookSection />
           <OurClients />
+          <EverythingYouNeed />
+          <WhatSchedule />
+          {/* <NotebookSection /> */}
           <PhoneBook />
           <NewsLetter />
         </>

@@ -32,7 +32,7 @@ export default function EverythingYouNeed() {
             <p>Não se preocupe, lembraremos você de seus agendamentos</p>
           </div>
         </div>
-        <a href="/">Ver todas funcionalidades</a>
+        <a href="/">Quero encontrar um serviço</a>
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import "./MenuHeader.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../redux/userSlice";
 import { removeUser } from "../../../redux/userSliceDados";
@@ -12,6 +12,7 @@ export default function MenuHeader() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state?.userDados?.role);
   const [isAdmin, setIsAdmin] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (userData === "ADMIN") {
@@ -37,6 +38,7 @@ export default function MenuHeader() {
                 dispatch(logout());
                 dispatch(removeUser());
                 localStorage.removeItem("token");
+                navigate("/");
               }}
             >
               Sair

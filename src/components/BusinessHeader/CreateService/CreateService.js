@@ -15,7 +15,6 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import "./CreateService.scss";
-import useRegisterPortifolio from "../../../hooks/register/useRegisterPortifolio.js";
 import useRegisterPortifolioJob from "../../../hooks/register/useRegisterPortfolioJob.js";
 import useDisplayCompanyPortiByUserId from "../../../hooks/display/company/useDisplayCompanyPortiByUserId.js";
 import useDisplayCategory from "../../../hooks/display/category/useDisplayCategory.js";
@@ -43,32 +42,12 @@ export default function CreateService({ openModal, handleCloseModal }) {
   const [base64ImageData2, setBase64ImageData2] = useState("");
   const [image3, setImage3] = useState(null);
   const [base64ImageData3, setBase64ImageData3] = useState("");
-  const [segunda, setSegunda] = useState(false);
-  const [segundaHoraInicio, setSegundaHoraInicio] = useState("00:00");
-  const [segundaHoraFim, setSegundaHoraFim] = useState("00:00");
-  const [terca, setTerca] = useState(false);
-  const [tercaHoraInicio, setTercaHoraInicio] = useState("00:00");
-  const [tercaHoraFim, setTercaHoraFim] = useState("00:00");
-  const [quarta, setQuarta] = useState(false);
-  const [quartaHoraInicio, setQuartaHoraInicio] = useState("00:00");
-  const [quartaHoraFim, setQuartaHoraFim] = useState("00:00");
-  const [quinta, setQuinta] = useState(false);
-  const [quintaHoraInicio, setQuintaHoraInicio] = useState("00:00");
-  const [quintaHoraFim, setQuintaHoraFim] = useState("00:00");
-  const [sexta, setSexta] = useState(false);
-  const [sextaHoraInicio, setSextaHoraInicio] = useState("00:00");
-  const [sextaHoraFim, setSextaHoraFim] = useState("00:00");
-  const [sabado, setSabado] = useState(false);
-  const [sabadoHoraInicio, setSabadoHoraInicio] = useState("00:00");
-  const [sabadoHoraFim, setSabadoHoraFim] = useState("00:00");
-  const [domingo, setDomingo] = useState(false);
-  const [domingoHoraInicio, setDomingoHoraInicio] = useState("00:00");
-  const [domingoHoraFim, setDomingoHoraFim] = useState("00:00");
+  const [jobId, setJobId] = useState();
+  const [portifolioId, setPortifolioId] = useState();
   const userData = useSelector((state) => state?.userDados);
   const dadosJson = localStorage.getItem("registrarPort");
   const tokenStorage = JSON.parse(localStorage.getItem("token"));
   const dados = JSON.parse(dadosJson);
-  const { registerPortifolio } = useRegisterPortifolio();
   const { registerPortifolioJob } = useRegisterPortifolioJob();
   const { displayCompanyPortiByUserId } = useDisplayCompanyPortiByUserId();
   const { displayCategory } = useDisplayCategory();
@@ -106,6 +85,7 @@ export default function CreateService({ openModal, handleCloseModal }) {
   async function searchDisplayCompanyPortiByUserId() {
     let resultCategory = await displayCompanyPortiByUserId(userData?.id);
     setDisplayCompany(resultCategory);
+    setPortifolioId(resultCategory.data[0].id)
   }
 
   function btnNext() {
@@ -154,6 +134,7 @@ export default function CreateService({ openModal, handleCloseModal }) {
       dados.subCategories.push(name.id);
       btn.classList.add("selected");
       setSubCategorySelect(true);
+      setJobId(name.id)
     } else {
       dados.subCategories.splice(dados.subCategories.indexOf(name.id), 1);
       btn.classList.remove("selected");
@@ -185,7 +166,31 @@ export default function CreateService({ openModal, handleCloseModal }) {
     );
   }
 
-  function submit() {}
+  const submit = async () => {
+    const tokenStorage = JSON.parse(localStorage.getItem("token"))
+    let preco = isPrice.replace(/[^0-9]/g, "");
+    preco = preco.slice(0, -2) + "." + isPrice.slice(-2);
+    await registerPortifolioJob(
+      isJobCategoryName,
+      portifolioId,
+      jobId,
+      preco,
+      isDescription,
+      isDuracao,
+      base64ImageData1.base64,
+      base64ImageData2.base64,
+      base64ImageData3.base64,
+      tokenStorage.token
+    );
+    toast({
+      title: "Serviço criada.",
+      description: "Seu Serviço foi cadastrado com sucesso!",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+    navigate("/")
+  };
 
   return (
     <>
@@ -264,13 +269,6 @@ export default function CreateService({ openModal, handleCloseModal }) {
                                 >
                                   {jobSubCategory?.name}
                                 </button>
-                                {/* {jobSubCategory?.subCategories?.map(
-                                  (nameSubCategory) => {
-                                    return (
-                                      
-                                    );
-                                  }
-                                )} */}
                               </>
                             );
                           })}
@@ -336,263 +334,6 @@ export default function CreateService({ openModal, handleCloseModal }) {
                 )}
                 {page === 3 ? (
                   <div className="boxPageThree">
-                    <h2>Defina a disponibilidade de horários</h2>
-                    <p>
-                      <b>Atenção:</b> Dias sem restrição de horário poderão ser <br/>
-                      agendados durante o horário de atendimento delimitado.
-                    </p>
-                    <div className="boxsImages">
-                    <div className="boxHorarios">
-                <label className="labelLine">
-                  <div className="divCheck">
-                    <input
-                      type="checkbox"
-                      isChecked={segunda}
-                      onChange={() => setSegunda(!segunda)}
-                    />
-                    Segunda-Feira
-                  </div>
-                  {segunda ? (
-                    <div className="divHorarios">
-                      <input
-                        type="time"
-                        value={segundaHoraInicio}
-                        onChange={(event) =>
-                          setSegundaHoraInicio(event.target.value)
-                        }
-                        placeholder="Inicio"
-                      />
-                      -
-                      <input
-                        type="time"
-                        value={segundaHoraFim}
-                        onChange={(event) =>
-                          setSegundaHoraFim(event.target.value)
-                        }
-                        placeholder="Fim"
-                      />
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </label>
-              </div>
-              <div className="boxHorarios">
-                <label className="labelLine">
-                  <div className="divCheck">
-                    <input
-                      type="checkbox"
-                      isChecked={terca}
-                      onChange={() => setTerca(!terca)}
-                    />
-                    Terça-Feira
-                  </div>
-                  {terca ? (
-                    <div className="divHorarios">
-                      <input
-                        type="time"
-                        value={tercaHoraInicio}
-                        onChange={(event) =>
-                          setTercaHoraInicio(event.target.value)
-                        }
-                        placeholder="Inicio"
-                      />
-                      -
-                      <input
-                        type="time"
-                        value={tercaHoraFim}
-                        onChange={(event) =>
-                          setTercaHoraFim(event.target.value)
-                        }
-                        placeholder="Fim"
-                      />
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </label>
-              </div>
-              <div className="boxHorarios">
-                <label className="labelLine">
-                  <div className="divCheck">
-                    <input
-                      type="checkbox"
-                      isChecked={quarta}
-                      onChange={() => setQuarta(!quarta)}
-                    />
-                    Quarta-Feira
-                  </div>
-                  {quarta ? (
-                    <div className="divHorarios">
-                      <input
-                        type="time"
-                        value={quartaHoraInicio}
-                        onChange={(event) =>
-                          setQuartaHoraInicio(event.target.value)
-                        }
-                        placeholder="Inicio"
-                      />
-                      -
-                      <input
-                        type="time"
-                        value={quartaHoraFim}
-                        onChange={(event) =>
-                          setQuartaHoraFim(event.target.value)
-                        }
-                        placeholder="Fim"
-                      />
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </label>
-              </div>
-              <div className="boxHorarios">
-                <label className="labelLine">
-                  <div className="divCheck">
-                    <input
-                      type="checkbox"
-                      isChecked={quinta}
-                      onChange={() => setQuinta(!quinta)}
-                    />
-                    Quinta-Feira
-                  </div>
-                  {quinta ? (
-                    <div className="divHorarios">
-                      <input
-                        type="time"
-                        value={quintaHoraInicio}
-                        onChange={(event) =>
-                          setQuintaHoraInicio(event.target.value)
-                        }
-                        placeholder="Inicio"
-                      />
-                      -
-                      <input
-                        type="time"
-                        value={quintaHoraFim}
-                        onChange={(event) =>
-                          setQuintaHoraFim(event.target.value)
-                        }
-                        placeholder="Fim"
-                      />
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </label>
-              </div>
-              <div className="boxHorarios">
-                <label className="labelLine">
-                  <div className="divCheck">
-                    <input
-                      type="checkbox"
-                      isChecked={sexta}
-                      onChange={() => setSexta(!sexta)}
-                    />
-                    Sexta-Feira
-                  </div>
-                  {sexta ? (
-                    <div className="divHorarios">
-                      <input
-                        type="time"
-                        value={sextaHoraInicio}
-                        onChange={(event) =>
-                          setSextaHoraInicio(event.target.value)
-                        }
-                        placeholder="Inicio"
-                      />
-                      -
-                      <input
-                        type="time"
-                        value={sextaHoraFim}
-                        onChange={(event) =>
-                          setSextaHoraFim(event.target.value)
-                        }
-                        placeholder="Fim"
-                      />
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </label>
-              </div>
-              <div className="boxHorarios">
-                <label className="labelLine">
-                  <div className="divCheck">
-                    <input
-                      type="checkbox"
-                      isChecked={sabado}
-                      onChange={() => setSabado(!sabado)}
-                    />
-                    Sabado
-                  </div>
-                  {sabado ? (
-                    <div className="divHorarios">
-                      <input
-                        type="time"
-                        value={sabadoHoraInicio}
-                        onChange={(event) =>
-                          setSabadoHoraInicio(event.target.value)
-                        }
-                        placeholder="Inicio"
-                      />
-                      -
-                      <input
-                        type="time"
-                        value={sabadoHoraFim}
-                        onChange={(event) =>
-                          setSabadoHoraFim(event.target.value)
-                        }
-                        placeholder="Fim"
-                      />
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </label>
-              </div>
-              <div className="boxHorarios">
-                <label className="labelLine">
-                  <div className="divCheck">
-                    <input
-                      type="checkbox"
-                      isChecked={domingo}
-                      onChange={() => setDomingo(!domingo)}
-                    />
-                    Domingo
-                  </div>
-                  {domingo ? (
-                    <div className="divHorarios">
-                      <input
-                        type="time"
-                        value={domingoHoraInicio}
-                        onChange={(event) =>
-                          setDomingoHoraInicio(event.target.value)
-                        }
-                        placeholder="Inicio"
-                      />
-                      -
-                      <input
-                        type="time"
-                        value={domingoHoraFim}
-                        onChange={(event) =>
-                          setDomingoHoraFim(event.target.value)
-                        }
-                        placeholder="Fim"
-                      />
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </label>
-              </div></div>{" "}
-                  </div>
-                ) : (
-                  ""
-                )}
-                {page === 4 ? (
-                  <div className="boxPageFour">
                     <h2>Adicionar fotos (Máx. 3)</h2>
                     <div className="boxsImages">
                       <div>
@@ -624,8 +365,8 @@ export default function CreateService({ openModal, handleCloseModal }) {
                 ) : (
                   ""
                 )}
-                {page === 5 ? (
-                  <div className="boxPageFive">
+                {page === 4 ? (
+                  <div className="boxPageFour">
                     <h2>Revisão de dados</h2>
                     <div className="boxDados">
                       <div className="boxCategService">
@@ -648,7 +389,7 @@ export default function CreateService({ openModal, handleCloseModal }) {
                         </div>
                         <div className="display">
                           <p>Duração:</p>
-                          <p>valor aqui</p>
+                          <p>{isDuracao}</p>
                         </div>
                         <div className="display">
                           <p>Descrição (opcional):</p>

@@ -5,19 +5,32 @@ export default function useRegisterPortifolioJob() {
 
   async function registerPortifolioJob(
     name,
-    price,
     portfolioId,
     jobId,
-    description
+    price,
+    description,
+    duration,
+    image1,
+    image2,
+    image3,
+    token
   ) {
     let url = `${apiUrl}:8000/agenda/userjob/`;
 
     const response = await axios.post(url, {
       name: name,
-      price: price,
       portfolioId: portfolioId,
       jobId: jobId,
+      price: price,
       description: description,
+      duration: `0${duration}:00`,
+      coverImage: "",
+      restricted: false,
+      images: [image1, image2, image3]
+    }, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
     });
     return response.data;
   }
